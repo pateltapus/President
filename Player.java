@@ -1,3 +1,5 @@
+
+
 public class Player{
 	private boolean isPresident;
 	private Hand hand;
@@ -16,12 +18,17 @@ public class Player{
 		//potentially change it to a rank system instead of a boolean president system for variable # of players
 		this.isPresident = isPres;
 	}
-	
+
 	public Hand getHand(){
 		return this.hand;
 	}
 
 	public String getName(){
 		return this.name;
+	}
+
+	public void debugHand()
+	{
+		hand.sortHand();
 	}
 }

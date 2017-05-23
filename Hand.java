@@ -53,11 +53,120 @@ public class Hand{
 		//also order of suit from left to right is Clubs, Diamonds, Hearts, Spades
 		//example sorted hand: (Suit|Value) 7D JH 5C 4H 9S JC 8C KC 10C 10S 8S 8D 4D
 		//8C 8D 8S JC JH 10C 10S 4D 4H KC 9S 7D 5C
+		//System.out.println("FLAG");
+		selectionSort();
+		/*for(int k = 0; k < hand.size(); k++)
+		{
+			System.out.println(hand.get(k).getValue());
+		}*/
+		ArrayList<Card> sortingHand = new ArrayList<Card>(hand);
+		clearHand();
+		sortingHand.add(0, new Card(-1, -1));
+		sortingHand.add(0, new Card(-1, -1));
+		sortingHand.add(0, new Card(-1, -1));
+		sortingHand.add(0, new Card(-1, -1));
+		for(int i = sortingHand.size() - 1; i > 3; i--)
+		{
+
+			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue() )
+			{
+				i = i-3;
+			}
+			else if(sortingHand.get(i).getValue() == sortingHand.get(i-2).getValue())
+			{
+				i = i-2;
+			}
+			else if(sortingHand.get(i).getValue() == sortingHand.get(i-1).getValue())
+			{
+				i = i-1;
+			}
+			else
+			{
+				hand.add(0,sortingHand.get(i));
+				sortingHand.remove(i);
+			}
+		}
+
+		for(int i = sortingHand.size() - 1; i > 3; i--)
+		{
+			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue())
+			{
+				i = i-3;
+			}
+			else if(sortingHand.get(i).getValue() == sortingHand.get(i-2).getValue())
+			{
+				i = i-2;
+			}
+			else
+			{
+				hand.add(0,sortingHand.get(i));
+				hand.add(0, sortingHand.get(i-1));
+				sortingHand.remove(i);
+				sortingHand.remove(i-1);
+				i = i - 1;
+			}
+		}
+
+		for(int i = sortingHand.size() - 1; i > 3; i--)
+		{
+			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue())
+			{
+				i = i-3;
+			}
+			else
+			{
+				hand.add(0,sortingHand.get(i));
+				hand.add(0, sortingHand.get(i-1));
+				hand.add(0,sortingHand.get(i-2));
+				sortingHand.remove(i);
+				sortingHand.remove(i-1);
+				sortingHand.remove(i-2);
+				i = i-2;
+			}
+		}
+
+		for(int i = sortingHand.size() - 1; i > 3; i-=4)
+		{
+			hand.add(0,sortingHand.get(i));
+			hand.add(0, sortingHand.get(i-1));
+			hand.add(0,sortingHand.get(i-2));
+			hand.add(0, sortingHand.get(i-3));
+			sortingHand.remove(i);
+			sortingHand.remove(i-1);
+			sortingHand.remove(i-2);
+			sortingHand.remove(i-3);
+			i = i-3;
+		}
+
+		System.out.println("Values in hand after all elements are parsed");
+		for(int k = 0; k < hand.size(); k++)
+		{
+			System.out.println(hand.get(k).getValue());
+		}
+	}
+
+	public void selectionSort()
+	{
+
+		for(int i = 0; i < hand.size(); i++)
+		{
+			int max = i;
+			for(int j = i + 1; j < hand.size(); j++)
+			{
+				if(hand.get(j).getValue() > hand.get(max).getValue())
+				{
+					max = j;
+				}
+			}
+			Card temp = hand.get(i);
+			hand.set(i, hand.get(max));
+			hand.set(max, temp);
+		}
 	}
 }
 
 /*
-	FOR REFERENCE: 
+	FOR REFERENCE:
 
 	public final static int SPADES = 0;
 	public final static int HEARTS = 1;

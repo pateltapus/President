@@ -5,9 +5,10 @@ public class President{
 
 		PresidentGUI newGame = new PresidentGUI();
 		printCards();
-	
+
+
 	}
-	
+
 	public static void gameLoop(){
 		//gameloop
 	}
@@ -27,7 +28,7 @@ public class President{
 
 
 
-dijsjds
+
 
 
 
@@ -47,6 +48,7 @@ dijsjds
 		playerList[2] = new Player("Linda");
 		playerList[3] = new Player("Bill");
 		deal(4, playerList);
+		playerList[0].debugHand();
 
 		for(int i = 0; i < 4; i++){
 			System.out.print(playerList[i].getName() + "\n");
@@ -82,4 +84,4 @@ dijsjds
 			System.out.print("\n");
 		}
 	}
-} 
+}
