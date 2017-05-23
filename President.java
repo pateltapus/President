@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class President{
 	public static void main(String args[]){
 
-		PresidentGUI newGame = new PresidentGUI();
+		//PresidentGUI newGame = new PresidentGUI();
 		printCards();
 
 

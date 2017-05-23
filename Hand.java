@@ -65,40 +65,43 @@ public class Hand{
 		sortingHand.add(0, new Card(-1, -1));
 		sortingHand.add(0, new Card(-1, -1));
 		sortingHand.add(0, new Card(-1, -1));
-		for(int i = sortingHand.size() - 1; i > 3; i--)
-		{
 
-			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue() )
-			{
+		//populate hand with 2's first
+		for(int i = sortingHand.size()-1; i > 3; i--){
+			if(sortingHand.get(i).getValue() == 2){
+				hand.add(0,sortingHand.get(i));
+				sortingHand.remove(i);
+			}
+			else{
+				break;
+			}
+		}
+
+		for(int i = sortingHand.size() - 1; i > 3; i--){
+
+			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue()){
 				i = i-3;
 			}
-			else if(sortingHand.get(i).getValue() == sortingHand.get(i-2).getValue())
-			{
+			else if(sortingHand.get(i).getValue() == sortingHand.get(i-2).getValue()){
 				i = i-2;
 			}
-			else if(sortingHand.get(i).getValue() == sortingHand.get(i-1).getValue())
-			{
+			else if(sortingHand.get(i).getValue() == sortingHand.get(i-1).getValue()){
 				i = i-1;
 			}
-			else
-			{
+			else{
 				hand.add(0,sortingHand.get(i));
 				sortingHand.remove(i);
 			}
 		}
 
-		for(int i = sortingHand.size() - 1; i > 3; i--)
-		{
-			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue())
-			{
+		for(int i = sortingHand.size() - 1; i > 3; i--){
+			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue()){
 				i = i-3;
 			}
-			else if(sortingHand.get(i).getValue() == sortingHand.get(i-2).getValue())
-			{
+			else if(sortingHand.get(i).getValue() == sortingHand.get(i-2).getValue()){
 				i = i-2;
 			}
-			else
-			{
+			else{
 				hand.add(0,sortingHand.get(i));
 				hand.add(0, sortingHand.get(i-1));
 				sortingHand.remove(i);
@@ -107,14 +110,11 @@ public class Hand{
 			}
 		}
 
-		for(int i = sortingHand.size() - 1; i > 3; i--)
-		{
-			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue())
-			{
+		for(int i = sortingHand.size() - 1; i > 3; i--){
+			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue()){
 				i = i-3;
 			}
-			else
-			{
+			else{
 				hand.add(0,sortingHand.get(i));
 				hand.add(0, sortingHand.get(i-1));
 				hand.add(0,sortingHand.get(i-2));
@@ -125,8 +125,7 @@ public class Hand{
 			}
 		}
 
-		for(int i = sortingHand.size() - 1; i > 3; i-=4)
-		{
+		for(int i = sortingHand.size() - 1; i > 3; i-=4){
 			hand.add(0,sortingHand.get(i));
 			hand.add(0, sortingHand.get(i-1));
 			hand.add(0,sortingHand.get(i-2));
@@ -139,8 +138,8 @@ public class Hand{
 		}
 
 		System.out.println("Values in hand after all elements are parsed");
-		for(int k = 0; k < hand.size(); k++)
-		{
+
+		for(int k = 0; k < hand.size(); k++){
 			System.out.println(hand.get(k).getValue());
 		}
 	}
@@ -148,13 +147,10 @@ public class Hand{
 	public void selectionSort()
 	{
 
-		for(int i = 0; i < hand.size(); i++)
-		{
+		for(int i = 0; i < hand.size(); i++){
 			int max = i;
-			for(int j = i + 1; j < hand.size(); j++)
-			{
-				if(hand.get(j).getValue() > hand.get(max).getValue())
-				{
+			for(int j = i + 1; j < hand.size(); j++){
+				if(hand.get(j).getValue() > hand.get(max).getValue()){
 					max = j;
 				}
 			}
