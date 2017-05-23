@@ -53,7 +53,7 @@ public class Hand{
 		//also order of suit from left to right is Clubs, Diamonds, Hearts, Spades
 		//example sorted hand: (Suit|Value) 7D JH 5C 4H 9S JC 8C KC 10C 10S 8S 8D 4D
 		//8C 8D 8S JC JH 10C 10S 4D 4H KC 9S 7D 5C
-		//System.out.println("FLAG");
+
 		selectionSort();
 		/*for(int k = 0; k < hand.size(); k++)
 		{
@@ -169,13 +169,13 @@ public class Hand{
 			i = i-3;
 		}
 
-		/*DEBUG*/
+		/*DEBUG
 		System.out.println("Values in hand after all elements are parsed");
 
 		for(int k = 0; k < hand.size(); k++){
 			System.out.println(hand.get(k).getValue());
 		}
-		/****/
+		*/
 	}
 
 	public void selectionSort()

@@ -17,7 +17,7 @@ public class Card{
 		this.suit = -1;
 	}
 
-	public Card(int value, int suit){ //no base constructer
+	public Card(int value, int suit){ //constructer for real cards
 		this.value = value;
 		this.suit = suit;
 	}
