@@ -61,10 +61,10 @@ public class Hand{
 		}*/
 		ArrayList<Card> sortingHand = new ArrayList<Card>(hand);
 		clearHand();
-		sortingHand.add(0, new Card(-1, -1));
-		sortingHand.add(0, new Card(-1, -1));
-		sortingHand.add(0, new Card(-1, -1));
-		sortingHand.add(0, new Card(-1, -1));
+		sortingHand.add(0, new Card());
+		sortingHand.add(0, new Card());
+		sortingHand.add(0, new Card());
+		sortingHand.add(0, new Card());
 
 		//populate hand with 2's first
 		for(int i = sortingHand.size()-1; i > 3; i--){
@@ -77,6 +77,7 @@ public class Hand{
 			}
 		}
 
+		//check for singles
 		for(int i = sortingHand.size() - 1; i > 3; i--){
 
 			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue()){
@@ -94,6 +95,7 @@ public class Hand{
 			}
 		}
 
+		//check for doubles
 		for(int i = sortingHand.size() - 1; i > 3; i--){
 			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue()){
 				i = i-3;
@@ -101,23 +103,46 @@ public class Hand{
 			else if(sortingHand.get(i).getValue() == sortingHand.get(i-2).getValue()){
 				i = i-2;
 			}
-			else{
-				hand.add(0,sortingHand.get(i));
-				hand.add(0, sortingHand.get(i-1));
+			else{	
+				hand.add(0,sortingHand.get(i));		
+				if(sortingHand.get(i).getSuit()<sortingHand.get(i-1).getSuit())
+					hand.add(0, sortingHand.get(i-1));
+				else
+					hand.add(1,sortingHand.get(i-1));		
+
 				sortingHand.remove(i);
 				sortingHand.remove(i-1);
 				i = i - 1;
 			}
 		}
 
+		//check for triples
 		for(int i = sortingHand.size() - 1; i > 3; i--){
 			if(sortingHand.get(i).getValue() == sortingHand.get(i-3).getValue()){
 				i = i-3;
 			}
 			else{
+
 				hand.add(0,sortingHand.get(i));
-				hand.add(0, sortingHand.get(i-1));
-				hand.add(0,sortingHand.get(i-2));
+				if(sortingHand.get(i).getSuit()<sortingHand.get(i-1).getSuit()){
+					hand.add(0, sortingHand.get(i-1));
+					if(sortingHand.get(i-1).getSuit()<sortingHand.get(i-2).getSuit())
+						hand.add(0, sortingHand.get(i-2));
+					else if(sortingHand.get(i).getSuit()>sortingHand.get(i-2).getSuit())
+						hand.add(2, sortingHand.get(i-2));
+					else
+						hand.add(1, sortingHand.get(i-2));
+				}
+				else{
+					hand.add(1, sortingHand.get(i-1));
+					if(sortingHand.get(i).getSuit()<sortingHand.get(i-2).getSuit())
+						hand.add(0, sortingHand.get(i-2));
+					else if(sortingHand.get(i-1).getSuit()>sortingHand.get(i-2).getSuit())
+						hand.add(2, sortingHand.get(i-2));
+					else
+						hand.add(1, sortingHand.get(i-2));
+				}
+
 				sortingHand.remove(i);
 				sortingHand.remove(i-1);
 				sortingHand.remove(i-2);
@@ -125,11 +150,18 @@ public class Hand{
 			}
 		}
 
+		//check for quadruples
 		for(int i = sortingHand.size() - 1; i > 3; i-=4){
-			hand.add(0,sortingHand.get(i));
-			hand.add(0, sortingHand.get(i-1));
-			hand.add(0,sortingHand.get(i-2));
-			hand.add(0, sortingHand.get(i-3));
+			hand.add(0, new Card());
+			hand.add(0, new Card());
+			hand.add(0, new Card());
+			hand.add(0, new Card());
+
+			hand.set(3-sortingHand.get(i).getSuit(),sortingHand.get(i));
+			hand.set(3-sortingHand.get(i-1).getSuit(), sortingHand.get(i-1));
+			hand.set(3-sortingHand.get(i-2).getSuit(),sortingHand.get(i-2));
+			hand.set(3-sortingHand.get(i-3).getSuit(), sortingHand.get(i-3));
+
 			sortingHand.remove(i);
 			sortingHand.remove(i-1);
 			sortingHand.remove(i-2);
@@ -137,11 +169,13 @@ public class Hand{
 			i = i-3;
 		}
 
+		/*DEBUG*/
 		System.out.println("Values in hand after all elements are parsed");
 
 		for(int k = 0; k < hand.size(); k++){
 			System.out.println(hand.get(k).getValue());
 		}
+		/****/
 	}
 
 	public void selectionSort()

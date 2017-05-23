@@ -12,6 +12,11 @@ public class Card{
 
 	public final int value, suit;//value 2-14  suit 0-3
 
+	public Card(){ //base constructer for dummy cards
+		this.value = -1;
+		this.suit = -1;
+	}
+
 	public Card(int value, int suit){ //no base constructer
 		this.value = value;
 		this.suit = suit;

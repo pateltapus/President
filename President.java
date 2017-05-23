@@ -49,6 +49,9 @@ public class President{
 		playerList[3] = new Player("Bill");
 		deal(4, playerList);
 		playerList[0].debugHand();
+		playerList[1].debugHand();
+		playerList[2].debugHand();
+		playerList[3].debugHand();
 
 		for(int i = 0; i < 4; i++){
 			System.out.print(playerList[i].getName() + "\n");
