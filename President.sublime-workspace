@@ -1,0 +1,1581 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Jfra",
+				"JFrame"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"set",
+				"set"
+			],
+			[
+				"ex",
+				"EXIT_ON_CLOSE"
+			],
+			[
+				"pr",
+				"println"
+			],
+			[
+				"displ",
+				"display"
+			],
+			[
+				"dis",
+				"display"
+			],
+			[
+				"WAIT_",
+				"WAIT_ORIGIN"
+			],
+			[
+				"modu",
+				"module\tmodule"
+			],
+			[
+				"Rect",
+				"RectPrism"
+			],
+			[
+				"max",
+				"max_area"
+			],
+			[
+				"he",
+				"height_"
+			],
+			[
+				"wid",
+				"width_"
+			],
+			[
+				"le",
+				"length_"
+			],
+			[
+				"rad",
+				"radius_"
+			],
+			[
+				"leng",
+				"length_"
+			],
+			[
+				"postfix",
+				"postfix_traversal"
+			],
+			[
+				"size",
+				"sizeof"
+			],
+			[
+				"head",
+				"headPtr"
+			],
+			[
+				"curr",
+				"currPtr"
+			],
+			[
+				"tuple",
+				"tuples_head"
+			],
+			[
+				"cell",
+				"cells"
+			],
+			[
+				"sk",
+				"skeleton1"
+			],
+			[
+				"ene",
+				"enemiesCoordinatesArray"
+			],
+			[
+				"cur",
+				"cur_game"
+			],
+			[
+				"cols",
+				"cols"
+			],
+			[
+				"y",
+				"y"
+			],
+			[
+				"display",
+				"display_HEIGHT"
+			],
+			[
+				"style",
+				"font-style"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Hand.java",
+			"settings":
+			{
+				"buffer_size": 5452,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Card.java",
+			"settings":
+			{
+				"buffer_size": 887,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Deck.java",
+			"settings":
+			{
+				"buffer_size": 1012,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "President.java",
+			"settings":
+			{
+				"buffer_size": 1995,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "PresidentGUI.java",
+			"settings":
+			{
+				"buffer_size": 1304,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "PresidentPanel.java",
+			"settings":
+			{
+				"buffer_size": 1552,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "public class PresidentPanel extends JPanel{"
+			}
+		},
+		{
+			"file": "PresidentNotes.txt",
+			"settings":
+			{
+				"buffer_size": 69,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Player.java",
+			"settings":
+			{
+				"buffer_size": 567,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 219.0,
+		"last_filter": "set syntax: java",
+		"selected_items":
+		[
+			[
+				"set syntax: java",
+				"Set Syntax: Java"
+			],
+			[
+				"set syntax: py",
+				"Set Syntax: Python"
+			],
+			[
+				"Package Control: Inst",
+				"Package Control: Install Package"
+			],
+			[
+				"set syntax: PYTHON",
+				"Set Syntax: Python"
+			],
+			[
+				"set syntax: c",
+				"Set Syntax: C"
+			],
+			[
+				"set syntax: c++",
+				"Set Syntax: C++"
+			],
+			[
+				"set syntax: ssytem",
+				"Set Syntax: SystemVerilog"
+			],
+			[
+				"set syntax: sys",
+				"Set Syntax: SystemVerilog"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"set syntax: C",
+				"Set Syntax: C"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"set syntax: pyth",
+				"Set Syntax: Python"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"Python",
+				"Build With: Python - Syntax Check"
+			],
+			[
+				"set syntax: Pyth",
+				"Set Syntax: Python"
+			],
+			[
+				"set syntax: JAVA",
+				"Set Syntax: Java"
+			],
+			[
+				"set syntax: html",
+				"Set Syntax: HTML"
+			],
+			[
+				"set syntax:jav",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"set syntax:css",
+				"Set Syntax: CSS"
+			],
+			[
+				"Set Syntax: Jaca",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"Set Syntax: C",
+				"Set Syntax: C"
+			],
+			[
+				"Set Syn",
+				"Set Syntax: C++"
+			],
+			[
+				"Set Syntax: JacaS",
+				"Set Syntax: JavaScript (Rails)"
+			],
+			[
+				"Instal P",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal pack",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 464.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"git clone https://github.com/Colorsublime/Colorsublime-Plugin.git",
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Yogi/Desktop/Coding/Java/President",
+		"/C/Users/Yogi/Desktop/Coding/Java/President/Images"
+	],
+	"file_history":
+	[
+		"/C/Users/Yogi/Desktop/Coding/Java/President/Screen.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/President/Spritesheet.java",
+		"/C/Users/Yogi/Desktop/Coding/Python/President/main.py",
+		"/C/Users/Yogi/Desktop/T2 DLists/Java Stuff/Final Project/src/pkgfinal/project/FinalProject.java",
+		"/C/Users/Yogi/Desktop/T2 DLists/Java Stuff/Final Project/src/pkgfinal/project/GUIController.java",
+		"/C/Users/Yogi/Desktop/T2 DLists/Java Stuff/Final Project/src/pkgfinal/project/LibraryCard.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/President/Hand.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/President/Deck.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/President/Card.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/President/Player.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/President/PresidentGUI.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/President/President.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/BlackjackGUI.java",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/dungeonGame.py",
+		"/C/Users/Yogi/Desktop/Coding/Java/Card Game with Tapus/Card.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/Card Game with Tapus/Hand.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/Card Game with Tapus/Deck.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/Card Game with Tapus/President.java",
+		"/C/Users/Yogi/Desktop/Coding/Java/HelloWorld.java",
+		"/C/Users/Yogi/Desktop/Coding/test proj.sublime-project",
+		"/C/Users/Yogi/Desktop/Coding/Python/President/spritesheet.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/pygameintro/pygameintro.py",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/MyJava.sublime-build",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/gameLevel.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/arrow.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/bolt.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/introMenu.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/archer.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/mage.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/dungeonGameBackup.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/class.py",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/User/Side Bar.sublime-settings",
+		"/C/Users/Yogi/Desktop/ECE220/MP10 c file.c",
+		"/C/Users/Yogi/Desktop/ECE220/MP11 c file",
+		"/C/Users/Yogi/Desktop/ECE220/MP6",
+		"/C/Users/Yogi/Desktop/ECE220/MP 2.txt",
+		"/C/Users/Yogi/Desktop/ECE220/MP 1.txt",
+		"/C/Users/Yogi/Desktop/ECE220/MP12 cpp file",
+		"/C/dev/385/finalproject2/Files/Git Files/testbench/test_init.sv",
+		"/C/Users/Yogi/Desktop/awni1_ypatel38_finalprojectcode/main.c",
+		"/C/Users/Yogi/Desktop/lab8test/software/usb_kb/main.c",
+		"/C/dev/385/finalproject2/Files/Git Files/simulation.sv",
+		"/C/dev/385/finalproject2/Files/writeFlagger.sv",
+		"/C/dev/385/finalproject2/Files/incrementer.sv",
+		"/C/Users/Yogi/Desktop/environment.sv",
+		"/C/Users/Yogi/Desktop/ECE220/MP12 hpp file",
+		"/C/Users/Yogi/Desktop/lab8test/software/usb_kb/usb.c",
+		"/C/Users/Yogi/Desktop/lab8test/software/usb_kb/io_handler.c",
+		"/C/Users/Yogi/Desktop/lab8test/main.c",
+		"/C/Users/Yogi/Desktop/ccode/software/usb_kb/usb.c",
+		"/C/Users/Yogi/Desktop/ccode/software/usb_kb/io_handler.c",
+		"/C/dev/385/finalproject/Files/SV Files/Color_Mapper.sv",
+		"/C/dev/385/finalproject/Files/SV Files/simulation.sv",
+		"/C/Users/Yogi/Desktop/ECE220/MP11 h file.c",
+		"/C/Users/Yogi/Desktop/ECE385/Lab8/code/providedcode/lab8.sv",
+		"/C/dev/385/finalproject/Files/SV Files/lab8.sv",
+		"/C/Users/Yogi/Desktop/ECE220/MP9 c file",
+		"/C/Users/Yogi/Desktop/ECE220/MP10 h file.h",
+		"/C/dev/385/lab9b/Provided Files/hello_world.c",
+		"/C/dev/385/lab9/Provided Files/hello_world.c",
+		"/C/Users/Yogi/Desktop/ECE220/MP8 c file",
+		"/C/Users/Yogi/Desktop/ECE220/MP9 h file",
+		"/C/dev/385/lab9/Provided Files/timer_hello_world1.c",
+		"/C/dev/385/lab9/Provided Files/aes.c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (11).c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (8).c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (10).c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (9).c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (7).c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (5).c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (6).c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (4).c",
+		"/C/dev/385/lab9/Provided Files/hello_world1 (3).c",
+		"/C/dev/385/lab9/Provided Files/helloworld.c",
+		"/C/Users/Yogi/Desktop/delete.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/skeleton.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/Dungeon Game/monsterDict.py",
+		"/C/Users/Yogi/Desktop/Coding/Python/pygameintro.py",
+		"/C/Users/Yogi/Desktop/ECE220/MP8 h file.h",
+		"/C/Users/Yogi/Desktop/Lab8_provided/software/usb_kb/io_handler.c",
+		"/C/Users/Yogi/Desktop/ECE385/Lab8/code/providedcode/software/usb_kb_bsp/linker.h",
+		"/C/Users/Yogi/Desktop/Sublime/Java/Vehicle.java",
+		"/C/Users/Yogi/Desktop/Sublime/Python/Vehicle.py",
+		"/C/Users/Yogi/Desktop/Sublime/Python/test.py",
+		"/C/Users/Yogi/Desktop/Sublime/Java/Car.java",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/User/Python3.5.sublime-build",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/User/bh_core.sublime-settings",
+		"/C/Users/Yogi/Desktop/ECE220/LAB7",
+		"/C/Users/Yogi/Desktop/ECE220/MP7",
+		"/C/Users/Yogi/Desktop/ECE385/Lab7/code/accum/main.c",
+		"/C/Users/Yogi/Desktop/Sublime/First HTML/stylesheet.css",
+		"/C/Users/Yogi/Desktop/Sublime/First HTML/p2.html",
+		"/C/Users/Yogi/Desktop/Sublime/First HTML/javascripttest.js",
+		"/C/Users/Yogi/Desktop/Sublime/First HTML/index.html",
+		"/C/Users/Yogi/Desktop/ECE385/Lab7/code/main.c",
+		"/C/Users/Yogi/Desktop/Materialize/parallax-template/index.html",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/User/JavaScript.sublime-build",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/Yogi/Desktop/Sublime/Test Java",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Yogi/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"jframe",
+			"*SCALE",
+			"President",
+			"ln",
+			"moveMade",
+			"movemade",
+			"time",
+			"WAIT_FOR_VSYNC",
+			"?",
+			"break;",
+			"String",
+			"virtual",
+			"string",
+			"PI",
+			"Shape::Shape",
+			"std::",
+			"std",
+			"PI",
+			"width_",
+			"length_",
+			"length",
+			"Sphere",
+			"Circle",
+			"PI",
+			"Rectangle",
+			"keycode",
+			":",
+			"Draw",
+			"Orien",
+			"print",
+			"tempVal",
+			"tempCol",
+			"tempRow",
+			"tuples",
+			"curN",
+			"headPtr",
+			"val ",
+			"val",
+			"val ",
+			"val",
+			"tempRow",
+			"currPtr",
+			"curNode",
+			"node*",
+			"lastNode",
+			"AddRoundKey",
+			"roundKey",
+			"fscanf",
+			"fcanf",
+			"maze.",
+			"ACK_MSG",
+			"READ_MSG",
+			"encrypted message",
+			"msg_en_in",
+			"READ_MSG",
+			"d0",
+			"ACK_MSG",
+			"d1",
+			"SEND_BACK",
+			"READ_MSG",
+			"MSG",
+			"d1",
+			"READ_MSG",
+			"d2",
+			"GOT_AWK",
+			"GOT_ACK",
+			"SEND_BACK",
+			"d1",
+			"d2",
+			"ack_msg",
+			"Read_Msg",
+			"quit",
+			"isDead",
+			"dead",
+			"hitTime",
+			"ranger",
+			"Arrow",
+			"arrow",
+			"Shoot",
+			"shoot",
+			"Shoot",
+			"Fire",
+			"Shoot",
+			"ranger",
+			"moveArrow",
+			"immune",
+			"self.orientationArray",
+			"print",
+			"preview",
+			"&",
+			"10",
+			"car",
+			"assert",
+			"87CEEB",
+			"cat"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Hand.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5452,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2461,
+								2461
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										2720,
+										2721
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										2702,
+										2703
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1440.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Card.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 887,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								115,
+								115
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										886,
+										887
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										17,
+										18
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Deck.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1012,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "President.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1995,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								24,
+								24
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "PresidentGUI.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1304,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1129,
+								1129
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1293,
+										1294
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1107,
+										1108
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/Java/Java.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 379.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "PresidentPanel.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1552,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1515,
+								1515
+							]
+						],
+						"settings":
+						{
+							"auto_name": "public class PresidentPanel extends JPanel{",
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1515,
+										1516
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/square_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1513,
+										1514
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/Java/Java.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "PresidentNotes.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 69,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Player.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 567,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 104.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/MyJava.sublime-build",
+	"project": "President.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 173.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
