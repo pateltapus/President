@@ -27,7 +27,7 @@ public class Player{
 		return this.name;
 	}
 
-	public void debugHand()
+	public void sortMyHand()
 	{
 		hand.sortHand();
 	}

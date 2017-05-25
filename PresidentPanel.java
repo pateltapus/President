@@ -11,6 +11,8 @@ public class PresidentPanel extends JPanel{
 	private BufferedImage[][] cardBackImages, cardImages;
 	private static String cardBackPath, cardsPath;
 
+	private Hand currentHand;
+	
 	private static final int cbROWS = 5;
 	private static final int cbCOLS = 3;
 	private static final int cROWS = 4;
@@ -70,7 +72,7 @@ public class PresidentPanel extends JPanel{
 				repaint();
 				z+=20;
 				try{
-					Thread.sleep(500); //slows down animations
+					Thread.sleep(25); //slows down animations
 				}
 				catch(Exception e){
 					System.out.println("Exception in thread sleep " + e.toString());
@@ -79,11 +81,17 @@ public class PresidentPanel extends JPanel{
 		}
 	}
 	//---------/
+	
+	public void renderAHand(Hand handPrint){
+		currentHand = handPrint;
+		repaint();
+		
+	}
 
 	public void rerender(){
 		repaint();
 	}
-	
+
 	private void parseCards(){
 		/*
 			FOR REFERENCE:
@@ -168,7 +176,17 @@ public class PresidentPanel extends JPanel{
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
-		g.drawImage(cardImages[x][y], z, 0, WIDTH/2, HEIGHT/2, null); //140 190
+		//for(int i = 0; i < currentHand.getHandSize(); i++){
+			//g.drawImage(cardImages[currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*25+250, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+		//}
+
+		int a = currentHand.getHandSize();
+		System.out.println("a: " + a);
+		for(int i = 0; i < a; i++){
+			int b = currentHand.getCardFromLoc(i).getSuit();
+			int c = currentHand.getCardFromLoc(i).getValue()-2;
+			g.drawImage(cardImages[b][c], i*25+250, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+		}
 
 	}
 

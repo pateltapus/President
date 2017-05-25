@@ -26,7 +26,7 @@ public class PresidentGUI extends JFrame{
 	private static final int HEIGHT = WIDTH/12*9;
 	private static final String NAME = "President";
 
-
+	private PresidentPanel jpanel;
 
 	public PresidentGUI(){
 
@@ -40,7 +40,7 @@ public class PresidentGUI extends JFrame{
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 
-		PresidentPanel jpanel = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
+		jpanel = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
 		jpanel.setBackground(Color.GREEN);
 		this.add(jpanel);
 
@@ -49,11 +49,13 @@ public class PresidentGUI extends JFrame{
 
 		//DEBUG
 		
-		jpanel.animate();
+		//jpanel.animate();
 		
 	}
-
-
+	
+	//DEBUG
+	public void renderHandOnScreen(Player[] playerList){
+		jpanel.renderAHand(playerList[0].getHand());
+	}
 
 }
-

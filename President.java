@@ -1,11 +1,32 @@
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class President{
-	public static void main(String args[]){
 
-		PresidentGUI newGame = new PresidentGUI();
+	private static Player playerList[];
+
+	public static void main(String args[]){
 		
-		printCards();
+		
+		PresidentGUI newGame = new PresidentGUI();
+		//Get names into an ArrayList
+		ArrayList<String> names = new ArrayList<String>();
+		names.add("Joe");
+		names.add("Sam");
+		names.add("Linda");
+		names.add("Bill");
+		
+		//1.)	//Create player list for number of players and name them
+		
+		
+		//2.)	//deal cards to them and sort them
+		setup(names);
+		printCardsToOutput();
+
+		
+		//3.)Communicate data to and from PresidentGUI
+		newGame.renderHandOnScreen(playerList);
+		
 
 
 	}
@@ -14,19 +35,26 @@ public class President{
 		//gameloop
 	}
 
-	public static void deal(int players, Player[] playerList){//pass static array of Players
+	public static void deal(){//pass static array of Players
 		Deck deck = new Deck();
 
-		while(deck.cardsDealt(players)==false){ //loop until cards are evenly dealt
-			for(int i = 0; i < players; i++){
+		while(deck.cardsDealt(playerList.length)==false){ //loop until cards are evenly dealt
+			for(int i = 0; i < playerList.length; i++){
 				//populate each hand in bunches of # of players
 				playerList[i].getHand().addCard(deck.dealCard());
+				playerList[i].sortMyHand();
 			}
 		}
 	}
 
 
-
+	public static void setup(ArrayList<String> names){
+		playerList = new Player[names.size()];
+		for(int i = 0; i < names.size(); i++){
+			playerList[i] = new Player(names.get(i));
+		}
+		deal();
+	}
 
 
 
@@ -42,17 +70,7 @@ public class President{
 /***********************************************
 	DEBUG
 ***********************************************/
-	public static void printCards(){ //tests if deal is working and outputs the hands
-		Player playerList[] = new Player[4];
-		playerList[0] = new Player("Joe");
-		playerList[1] = new Player("Sam");
-		playerList[2] = new Player("Linda");
-		playerList[3] = new Player("Bill");
-		deal(4, playerList);
-		playerList[0].debugHand();
-		playerList[1].debugHand();
-		playerList[2].debugHand();
-		playerList[3].debugHand();
+	public static void printCardsToOutput(){ //tests if deal is working and outputs the hands
 
 		for(int i = 0; i < 4; i++){
 			System.out.print(playerList[i].getName() + "\n");
