@@ -4,6 +4,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 
+
 public class PresidentPanel extends JPanel{
 
 	private BufferedImage cardBackSS, cardsSS;
@@ -19,7 +20,7 @@ public class PresidentPanel extends JPanel{
 	private static final int HEIGHT = 190;
 
 	//DEBUG------/
-	private int x,  y;
+	private int x,  y, z;
 	//-----------/
 
 	public PresidentPanel(String cardBackPath, String cardsPath){
@@ -27,6 +28,7 @@ public class PresidentPanel extends JPanel{
 		//DEBUG-------/
 		x = 0;
 		y = 0;
+		z = 0;
 		//------------/
 
 		this.cardBackPath = cardBackPath;
@@ -66,6 +68,7 @@ public class PresidentPanel extends JPanel{
 		for(this.x = 0; x<cROWS; x++){
 			for(this.y = 0; y<cCOLS; y++){
 				repaint();
+				z+=20;
 				try{
 					Thread.sleep(500); //slows down animations
 				}
@@ -74,20 +77,10 @@ public class PresidentPanel extends JPanel{
 				}
 			}
 		}
-		
-
-
-
-
-
-
-
-		//y=(y+1)%3;
-		//repaint();
 	}
 	//---------/
 
-	public void parseCards(){
+	private void parseCards(){
 		/*
 			FOR REFERENCE:
 
@@ -171,10 +164,8 @@ public class PresidentPanel extends JPanel{
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
-		g.drawImage(cardImages[x][y], 0, 0, null); //140 190
+		g.drawImage(cardImages[x][y], z, 0, WIDTH/2, HEIGHT/2, null); //140 190
 
 	}
-
-
 
 }
