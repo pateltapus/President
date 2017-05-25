@@ -12,8 +12,8 @@ public class PresidentPanel extends JPanel{
 
 	private static final int cbROWS = 5;
 	private static final int cbCOLS = 3;
-	private static final cROWS = 4;
-	private static final cCOLS = 13;
+	private static final int cROWS = 4;
+	private static final int cCOLS = 13;
 
 	private static final int WIDTH = 140;
 	private static final int HEIGHT = 190;
@@ -33,7 +33,7 @@ public class PresidentPanel extends JPanel{
 		this.cardsPath = cardsPath;
 
 		cardBackImages = new BufferedImage[cbROWS][cbCOLS]; //5 rows 3 columns,  ****ROWS PARSE DESIGN, COLS PARSE COLOR****
-		cardsPath = new BufferedImage[cROWS][cCOLS] ;//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
+		cardImages = new BufferedImage[cROWS][cCOLS] ;//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
 
 		try{
 			cardBackSS = ImageIO.read(new File(cardBackPath));
@@ -104,7 +104,7 @@ public class PresidentPanel extends JPanel{
 		cardImages[0][12] = cardBackSS.getSubimage(0, 3*HEIGHT, WIDTH, HEIGHT);
 
 		//TODO:
-		
+
 		//2 of hearts
 
 		//3-8 of hearts
@@ -142,9 +142,6 @@ public class PresidentPanel extends JPanel{
 		//K of clubs
 
 		//A of clubs
-
-
-
 
 	}
 
