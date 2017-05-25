@@ -88,10 +88,6 @@ public class PresidentPanel extends JPanel{
 		
 	}
 
-	public void rerender(){
-		repaint();
-	}
-
 	private void parseCards(){
 		/*
 			FOR REFERENCE:
@@ -176,18 +172,20 @@ public class PresidentPanel extends JPanel{
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
-		//for(int i = 0; i < currentHand.getHandSize(); i++){
-			//g.drawImage(cardImages[currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*25+250, 490, WIDTH/2, HEIGHT/2, null); //140 190 
-		//}
-
-		int a = currentHand.getHandSize();
-		System.out.println("a: " + a);
-		for(int i = 0; i < a; i++){
-			int b = currentHand.getCardFromLoc(i).getSuit();
-			int c = currentHand.getCardFromLoc(i).getValue()-2;
-			g.drawImage(cardImages[b][c], i*25+250, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+		for(int i = 0; i < currentHand.getHandSize(); i++){
+			g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*25+245, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+		
+/*		if(currentHand != null){
+			int b = 0;
+			int c = 0;
+			int a = currentHand.getHandSize();
+			System.out.println("a: " + a);
+			for(int i = 0; i < a; i++){
+				b = currentHand.getCardFromLoc(i).getSuit();
+				c = currentHand.getCardFromLoc(i).getValue()-2;
+				g.drawImage(cardImages[b][c], i*25+250, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+			}*/
 		}
-
 	}
 
 }
