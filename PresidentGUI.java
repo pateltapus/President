@@ -48,18 +48,9 @@ public class PresidentGUI extends JFrame{
 
 
 		//DEBUG
-		/*
-		while(true){
-			jpanel.animate();
-			try{
-				Thread.sleep(100); //slows down animations
-			}
-			catch(Exception e){
-				System.out.println("Exception in thread sleep " + e.toString());
-			}
-			
-		}
-		*/
+		
+		jpanel.animate();
+		
 	}
 
 

@@ -63,8 +63,27 @@ public class PresidentPanel extends JPanel{
 	//DEBUG-----/
 
 	public void animate(){
-		y=(y+1)%3;
-		repaint();
+		for(this.x = 0; x<cROWS; x++){
+			for(this.y = 0; y<cCOLS; y++){
+				repaint();
+				try{
+					Thread.sleep(500); //slows down animations
+				}
+				catch(Exception e){
+					System.out.println("Exception in thread sleep " + e.toString());
+				}
+			}
+		}
+		
+
+
+
+
+
+
+
+		//y=(y+1)%3;
+		//repaint();
 	}
 	//---------/
 
@@ -88,85 +107,71 @@ public class PresidentPanel extends JPanel{
 
 		//2,3,4 of spades
 		for(int i = 2; i > -1; i--)
-			cardImages[0][2-i] = cardBackSS.getSubimage(WIDTH, i*HEIGHT, WIDTH, HEIGHT);
+			cardImages[0][2-i] = cardsSS.getSubimage(WIDTH, i*HEIGHT, WIDTH, HEIGHT);
 
 		//5-10 of spades
 		for(int i = 9; i > 3; i--)
-			cardImages[0][12-i] = cardBackSS.getSubimage(0, i*HEIGHT, WIDTH, HEIGHT);
+			cardImages[0][12-i] = cardsSS.getSubimage(0, i*HEIGHT, WIDTH, HEIGHT);
 
 		//J of spades
-		cardImages[0][9] = cardBackSS.getSubimage(0, 2*HEIGHT, WIDTH, HEIGHT);
+		cardImages[0][9] = cardsSS.getSubimage(0, 2*HEIGHT, WIDTH, HEIGHT);
 		//Q of spades
-		cardImages[0][10] = cardBackSS.getSubimage(0, 0, WIDTH, HEIGHT);
+		cardImages[0][10] = cardsSS.getSubimage(0, 0, WIDTH, HEIGHT);
 		//K of spades
-		cardImages[0][11] = cardBackSS.getSubimage(0, 1*HEIGHT, WIDTH, HEIGHT);
+		cardImages[0][11] = cardsSS.getSubimage(0, 1*HEIGHT, WIDTH, HEIGHT);
 		//A of spades
-		cardImages[0][12] = cardBackSS.getSubimage(0, 3*HEIGHT, WIDTH, HEIGHT);
-
-		//TODO:
+		cardImages[0][12] = cardsSS.getSubimage(0, 3*HEIGHT, WIDTH, HEIGHT);
 
 		//2 of hearts
-		cardImages[1][0] = cardBackSS.getSubimage(5*WIDTH, 2*HEIGHT, WIDTH, HEIGHT);
+		cardImages[1][0] = cardsSS.getSubimage(5*WIDTH, 2*HEIGHT, WIDTH, HEIGHT);
 		//3-8 of hearts
 		for(int i = 5; i > -1; i--)
-			cardImages[1][6-i] = cardBackSS.getSubimage(2*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
+			cardImages[1][6-i] = cardsSS.getSubimage(2*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
 		//9, 10 of hearts
-		cardImages[1][7] = cardBackSS.getSubimage(WIDTH, 9*HEIGHT, WIDTH, HEIGHT);
-		cardImages[1][8] = cardBackSS.getSubimage(WIDTH, 8*HEIGHT, WIDTH, HEIGHT);
+		cardImages[1][7] = cardsSS.getSubimage(WIDTH, 9*HEIGHT, WIDTH, HEIGHT);
+		cardImages[1][8] = cardsSS.getSubimage(WIDTH, 8*HEIGHT, WIDTH, HEIGHT);
 		//J of hearts
-		cardImages[1][9] = cardBackSS.getSubimage(WIDTH, 6*HEIGHT, WIDTH, HEIGHT);
+		cardImages[1][9] = cardsSS.getSubimage(WIDTH, 6*HEIGHT, WIDTH, HEIGHT);
 		//Q of hearts
-		cardImages[1][10] = cardBackSS.getSubimage(WIDTH, 4*HEIGHT, WIDTH, HEIGHT);
+		cardImages[1][10] = cardsSS.getSubimage(WIDTH, 4*HEIGHT, WIDTH, HEIGHT);
 		//K of hearts
-		cardImages[1][11] = cardBackSS.getSubimage(WIDTH, 5*HEIGHT, WIDTH, HEIGHT);
+		cardImages[1][11] = cardsSS.getSubimage(WIDTH, 5*HEIGHT, WIDTH, HEIGHT);
 		//A of hearts
-		cardImages[1][12] = cardBackSS.getSubimage(WIDTH, 7*HEIGHT, WIDTH, HEIGHT);
+		cardImages[1][12] = cardsSS.getSubimage(WIDTH, 7*HEIGHT, WIDTH, HEIGHT);
 		//2-10 of diamonds
 		for(int i = 9; i > 0; i--)
-			cardImages[2][9-i] = cardBackSS.getSubimage(3*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
+			cardImages[2][9-i] = cardsSS.getSubimage(3*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
 		//J of diamonds
-		cardImages[2][9] = cardBackSS.getSubimage(2*WIDTH, 9*HEIGHT, WIDTH, HEIGHT);
+		cardImages[2][9] = cardsSS.getSubimage(2*WIDTH, 9*HEIGHT, WIDTH, HEIGHT);
 		//Q of diamonds
-		cardImages[2][10] = cardBackSS.getSubimage(2*WIDTH, 7*HEIGHT, WIDTH, HEIGHT);
+		cardImages[2][10] = cardsSS.getSubimage(2*WIDTH, 7*HEIGHT, WIDTH, HEIGHT);
 		//K of diamonds
-		cardImages[2][11] = cardBackSS.getSubimage(2*WIDTH, 8*HEIGHT, WIDTH, HEIGHT);
+		cardImages[2][11] = cardsSS.getSubimage(2*WIDTH, 8*HEIGHT, WIDTH, HEIGHT);
 		//A of diamonds
-		cardImages[2][12] = cardBackSS.getSubimage(3*WIDTH, 0, WIDTH, HEIGHT);
+		cardImages[2][12] = cardsSS.getSubimage(3*WIDTH, 0, WIDTH, HEIGHT);
 		//2 of clubs
-		cardImages[3][0] = cardBackSS.getSubimage(2*WIDTH, 6*HEIGHT, WIDTH, HEIGHT);
+		cardImages[3][0] = cardsSS.getSubimage(2*WIDTH, 6*HEIGHT, WIDTH, HEIGHT);
 		//3,4 of clubs
-		cardImages[3][1] = cardBackSS.getSubimage(5*WIDTH, HEIGHT, WIDTH, HEIGHT);
-		cardImages[3][2] = cardBackSS.getSubimage(5*WIDTH, 0, WIDTH, HEIGHT);
+		cardImages[3][1] = cardsSS.getSubimage(5*WIDTH, HEIGHT, WIDTH, HEIGHT);
+		cardImages[3][2] = cardsSS.getSubimage(5*WIDTH, 0, WIDTH, HEIGHT);
 		//5-10 of clubs
 		for(int i = 9; i > 3; i--)
-			cardImages[3][12-i] = cardBackSS.getSubimage(4*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
+			cardImages[3][12-i] = cardsSS.getSubimage(4*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
 		//J of clubs
-		cardImages[3][9] = cardBackSS.getSubimage(4*WIDTH, 2*HEIGHT, WIDTH, HEIGHT);
+		cardImages[3][9] = cardsSS.getSubimage(4*WIDTH, 2*HEIGHT, WIDTH, HEIGHT);
 		//Q of clubs
-		cardImages[3][10] = cardBackSS.getSubimage(4*WIDTH, 0, WIDTH, HEIGHT);
+		cardImages[3][10] = cardsSS.getSubimage(4*WIDTH, 0, WIDTH, HEIGHT);
 		//K of clubs
-		cardImages[3][11] = cardBackSS.getSubimage(4*WIDTH, HEIGHT, WIDTH, HEIGHT);
+		cardImages[3][11] = cardsSS.getSubimage(4*WIDTH, HEIGHT, WIDTH, HEIGHT);
 		//A of clubs
-`		cardImages[3][12] = cardBackSS.getSubimage(4*WIDTH, 3*HEIGHT, WIDTH, HEIGHT);
+		cardImages[3][12] = cardsSS.getSubimage(4*WIDTH, 3*HEIGHT, WIDTH, HEIGHT);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
-		g.drawImage(cardBackImages[4][2], 0, 0, null); //140 190
+		g.drawImage(cardImages[x][y], 0, 0, null); //140 190
 
 	}
 
