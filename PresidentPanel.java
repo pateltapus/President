@@ -80,6 +80,10 @@ public class PresidentPanel extends JPanel{
 	}
 	//---------/
 
+	public void rerender(){
+		repaint();
+	}
+	
 	private void parseCards(){
 		/*
 			FOR REFERENCE:
