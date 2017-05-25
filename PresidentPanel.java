@@ -85,7 +85,7 @@ public class PresidentPanel extends JPanel{
 			4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
 		*/
 		//cardImages[i][j] = cardBackSS.getSubimage(j*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
-		
+
 		//2,3,4 of spades
 		for(int i = 2; i > -1; i--)
 			cardImages[0][2-i] = cardBackSS.getSubimage(WIDTH, i*HEIGHT, WIDTH, HEIGHT);
@@ -106,43 +106,48 @@ public class PresidentPanel extends JPanel{
 		//TODO:
 
 		//2 of hearts
-
+		cardImages[1][0] = cardBackSS.getSubimage(5*WIDTH, 2*HEIGHT, WIDTH, HEIGHT);
 		//3-8 of hearts
-
+		for(int i = 5; i > -1; i--)
+			cardImages[1][6-i] = cardBackSS.getSubimage(2*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
 		//9, 10 of hearts
-
+		cardImages[1][7] = cardBackSS.getSubimage(WIDTH, 9*HEIGHT, WIDTH, HEIGHT);
+		cardImages[1][8] = cardBackSS.getSubimage(WIDTH, 8*HEIGHT, WIDTH, HEIGHT);
 		//J of hearts
-
+		cardImages[1][9] = cardBackSS.getSubimage(WIDTH, 6*HEIGHT, WIDTH, HEIGHT);
 		//Q of hearts
-
+		cardImages[1][10] = cardBackSS.getSubimage(WIDTH, 4*HEIGHT, WIDTH, HEIGHT);
 		//K of hearts
-
+		cardImages[1][11] = cardBackSS.getSubimage(WIDTH, 5*HEIGHT, WIDTH, HEIGHT);
 		//A of hearts
-
+		cardImages[1][12] = cardBackSS.getSubimage(WIDTH, 7*HEIGHT, WIDTH, HEIGHT);
 		//2-10 of diamonds
-
+		for(int i = 9; i > 0; i--)
+			cardImages[2][9-i] = cardBackSS.getSubimage(3*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
 		//J of diamonds
-
+		cardImages[2][9] = cardBackSS.getSubimage(2*WIDTH, 9*HEIGHT, WIDTH, HEIGHT);
 		//Q of diamonds
-
+		cardImages[2][10] = cardBackSS.getSubimage(2*WIDTH, 7*HEIGHT, WIDTH, HEIGHT);
 		//K of diamonds
-
+		cardImages[2][11] = cardBackSS.getSubimage(2*WIDTH, 8*HEIGHT, WIDTH, HEIGHT);
 		//A of diamonds
-
+		cardImages[2][12] = cardBackSS.getSubimage(3*WIDTH, 0, WIDTH, HEIGHT);
 		//2 of clubs
-
+		cardImages[3][0] = cardBackSS.getSubimage(2*WIDTH, 6*HEIGHT, WIDTH, HEIGHT);
 		//3,4 of clubs
-
+		cardImages[3][1] = cardBackSS.getSubimage(5*WIDTH, HEIGHT, WIDTH, HEIGHT);
+		cardImages[3][2] = cardBackSS.getSubimage(5*WIDTH, 0, WIDTH, HEIGHT);
 		//5-10 of clubs
-
-		//J of clubs 
-
+		for(int i = 9; i > 3; i--)
+			cardImages[3][12-i] = cardBackSS.getSubimage(4*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
+		//J of clubs
+		cardImages[3][9] = cardBackSS.getSubimage(4*WIDTH, 2*HEIGHT, WIDTH, HEIGHT);
 		//Q of clubs
-
+		cardImages[3][10] = cardBackSS.getSubimage(4*WIDTH, 0, WIDTH, HEIGHT);
 		//K of clubs
-
+		cardImages[3][11] = cardBackSS.getSubimage(4*WIDTH, HEIGHT, WIDTH, HEIGHT);
 		//A of clubs
-
+`		cardImages[3][12] = cardBackSS.getSubimage(4*WIDTH, 3*HEIGHT, WIDTH, HEIGHT);
 	}
 
 
@@ -162,9 +167,9 @@ public class PresidentPanel extends JPanel{
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
 		g.drawImage(cardBackImages[4][2], 0, 0, null); //140 190
-		
+
 	}
 
 
-	
+
 }
