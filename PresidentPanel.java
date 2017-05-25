@@ -172,8 +172,10 @@ public class PresidentPanel extends JPanel{
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
-		for(int i = 0; i < currentHand.getHandSize(); i++){
-			g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*25+245, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+		if(currentHand != null){
+			for(int i = 0; i < currentHand.getHandSize(); i++){
+				g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*25+245, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+		}
 		
 /*		if(currentHand != null){
 			int b = 0;
