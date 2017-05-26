@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+
 public class President{
 
 	private static Player playerList[];

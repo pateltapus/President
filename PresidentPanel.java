@@ -4,6 +4,9 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 public class PresidentPanel extends JPanel{
 
@@ -12,6 +15,7 @@ public class PresidentPanel extends JPanel{
 	private static String cardBackPath, cardsPath;
 
 	private Hand currentHand;
+	private boolean hasTurn = 1;
 	
 	private static final int cbROWS = 5;
 	private static final int cbCOLS = 3;
@@ -62,26 +66,34 @@ public class PresidentPanel extends JPanel{
 			System.out.println("Exception in Cards Spritesheet load" + e.toString());
 		}
 
+		addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent me){
+				/* TODO:
+					Figure out best way to track mouseclicks with a variable amount of cards, potentially cards shifting as hand shrinks
+				*/
+					)
+				if(hasTurn)//hasTurn determines whether a click can be made, for now hard coded to 1, will be changed to a method from logic class
+				//bound farthest right x and lowest and highest y
+					if(me.getX()<(25*(currentHand.getHandSize()-1)+245+WIDTH/2) && me.getY()>490 &&me.getY()<(490+HEIGHT/2))
+						//bound each card
+						if(me.getX()>(25*(currentHand.getHandSize()-1)+245))
+							System.out.println(currentHand.getCardFromLoc(currentHand.getHandSize()-1).getValue() + " " + currentHand.getCardFromLoc(currentHand.getHandSize()-1).getSuit());
+			}
+		});
+
 	}
 
-	//DEBUG-----/
 
-	public void animate(){
-		for(this.x = 0; x<cROWS; x++){
-			for(this.y = 0; y<cCOLS; y++){
-				repaint();
-				z+=20;
-				try{
-					Thread.sleep(25); //slows down animations
-				}
-				catch(Exception e){
-					System.out.println("Exception in thread sleep " + e.toString());
-				}
+	@Override
+	public void paint(Graphics g){ //override paint method provided by JPanel
+		super.paint(g);
+		if(currentHand != null){
+			for(int i = 0; i < currentHand.getHandSize(); i++){
+				g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*25+245, 490, WIDTH/2, HEIGHT/2, null); //140 190 
 			}
 		}
 	}
-	//---------/
-	
+
 	public void renderAHand(Hand handPrint){
 		currentHand = handPrint;
 		repaint();
@@ -89,22 +101,7 @@ public class PresidentPanel extends JPanel{
 	}
 
 	private void parseCards(){
-		/*
-			FOR REFERENCE:
-
-			public final static int SPADES = 0;
-			public final static int HEARTS = 1;
-			public final static int DIAMONDS = 2;
-			public final static int CLUBS = 3;
-
-			public final static int ACE = 14;
-			public final static int KING = 13;
-			public final static int QUEEN = 12;
-			public final static int JACK = 11;
-
-			4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
-		*/
-		//cardImages[i][j] = cardBackSS.getSubimage(j*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
+		//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
 
 		//2,3,4 of spades
 		for(int i = 2; i > -1; i--)
@@ -169,25 +166,23 @@ public class PresidentPanel extends JPanel{
 	}
 
 
-	@Override
-	public void paint(Graphics g){ //override paint method provided by JPanel
-		super.paint(g);
-		if(currentHand != null){
-			for(int i = 0; i < currentHand.getHandSize(); i++){
-				g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*25+245, 490, WIDTH/2, HEIGHT/2, null); //140 190 
-		}
-		
-/*		if(currentHand != null){
-			int b = 0;
-			int c = 0;
-			int a = currentHand.getHandSize();
-			System.out.println("a: " + a);
-			for(int i = 0; i < a; i++){
-				b = currentHand.getCardFromLoc(i).getSuit();
-				c = currentHand.getCardFromLoc(i).getValue()-2;
-				g.drawImage(cardImages[b][c], i*25+250, 490, WIDTH/2, HEIGHT/2, null); //140 190 
-			}*/
+
+	//DEBUG-----/
+
+	public void animate(){
+		for(this.x = 0; x<cROWS; x++){
+			for(this.y = 0; y<cCOLS; y++){
+				repaint();
+				z+=20;
+				try{
+					Thread.sleep(25); //slows down animations
+				}
+				catch(Exception e){
+					System.out.println("Exception in thread sleep " + e.toString());
+				}
+			}
 		}
 	}
-
+	//---------/
+	
 }
