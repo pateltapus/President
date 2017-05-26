@@ -10,13 +10,12 @@ public class PileLogic{
 		this.passPlayCounter = 0;
 	}
 	
-	public boolean checkClick (ArrayList<Card> queuedCards){
-		if(queuedCards.size() == 1 && queuedCards.get(0).getValue()==2) //account for 2's
+	public boolean checkClick (ArrayList<Card> queuedCards, Card chosenCard){
+		if(queuedCards.size()==1 && queuedCards.get(0).getValue()==2 && chosenCard.getValue()==2) //account for 2's
 			return false;
 			
-		int last = queuedCards.get(0).getValue();
 		for(int i = 1; i< queuedCards.size(); i++){
-			if(last != queuedCards.get(i).getValue())
+			if(chosenCard.getValue() != queuedCards.get(i).getValue())
 			return false;
 		}
 		return true;
@@ -37,7 +36,6 @@ public class PileLogic{
 				//throwTwos();
 			return true;
 		}
-		
 		return false;
 	}
 	

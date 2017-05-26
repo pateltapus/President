@@ -1,3 +1,4 @@
+
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,15 +8,22 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import java.util.ArrayList;
+
 
 public class PresidentPanel extends JPanel{
 
 	private BufferedImage cardBackSS, cardsSS;
 	private BufferedImage[][] cardBackImages, cardImages;
 	private static String cardBackPath, cardsPath;
+	private ArrayList<Integer> xMax, xMin;
+	private ArrayList<Card> cardQueue;
+	private PileLogic logicChecker;
+	private ArrayList<Boolean> raisedCards;
+
 
 	private Hand currentHand;
-	private boolean hasTurn = 1;
+	private boolean hasTurn = true;
 	
 	private static final int cbROWS = 5;
 	private static final int cbCOLS = 3;
@@ -39,6 +47,11 @@ public class PresidentPanel extends JPanel{
 
 		this.cardBackPath = cardBackPath;
 		this.cardsPath = cardsPath;
+		this.xMax = new ArrayList<Integer>();
+		this.xMin = new ArrayList<Integer>();
+		this.cardQueue = new ArrayList<Card>();
+		this.logicChecker = new PileLogic();
+		this.raisedCards = new Boolean();
 
 		cardBackImages = new BufferedImage[cbROWS][cbCOLS]; //5 rows 3 columns,  ****ROWS PARSE DESIGN, COLS PARSE COLOR****
 		cardImages = new BufferedImage[cROWS][cCOLS] ;//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
@@ -65,19 +78,31 @@ public class PresidentPanel extends JPanel{
 		catch(Exception e){
 			System.out.println("Exception in Cards Spritesheet load" + e.toString());
 		}
+		
+		
+		
+		
+		
+		
+		
+		
 
 		addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent me){
 				/* TODO:
 					Figure out best way to track mouseclicks with a variable amount of cards, potentially cards shifting as hand shrinks
 				*/
-					)
 				if(hasTurn)//hasTurn determines whether a click can be made, for now hard coded to 1, will be changed to a method from logic class
 				//bound farthest right x and lowest and highest y
-					if(me.getX()<(25*(currentHand.getHandSize()-1)+245+WIDTH/2) && me.getY()>490 &&me.getY()<(490+HEIGHT/2))
-						//bound each card
-						if(me.getX()>(25*(currentHand.getHandSize()-1)+245))
-							System.out.println(currentHand.getCardFromLoc(currentHand.getHandSize()-1).getValue() + " " + currentHand.getCardFromLoc(currentHand.getHandSize()-1).getSuit());
+					if(me.getY()>490 && me.getY()<(490+HEIGHT/2))
+						//bound each card	
+						for(int i = 0; i < xMin.size(); i++)
+							if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
+								System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
+								if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(i)))
+									cardQueue.add(currentHand.getCardFromLoc(i));
+								break;
+							}
 			}
 		});
 
@@ -88,14 +113,36 @@ public class PresidentPanel extends JPanel{
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
 		if(currentHand != null){
+			xMin.clear();
 			for(int i = 0; i < currentHand.getHandSize(); i++){
-				g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*25+245, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+				int j = 25; //change later for scaling
+				int k = 245; //change later for scaling
+				g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, 490, WIDTH/2, HEIGHT/2, null); //140 190 
+				xMin.add(i*j+k);
 			}
+			createXMax();
 		}
 	}
 
+	
+	public void createXMax(){
+		for(int i = 0; i < xMin.size()-1; i++)
+			xMax.add(xMin.get(i+1));
+		xMax.add(xMin.get(xMin.size()-1)+WIDTH/2);
+	}
+
+
+
+
+
+
+
+
+
 	public void renderAHand(Hand handPrint){
 		currentHand = handPrint;
+		for(int i = 0; i < currentHand.size(); i++)
+			raisedCards.add(false);
 		repaint();
 		
 	}
