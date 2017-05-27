@@ -34,6 +34,10 @@ public class Hand{
 		return hand.size();
 	}
 
+	public int getCardIndex(Card card){
+		return hand.indexOf(card);
+	}
+
 	public Card getCardFromLoc(int location){
 		//get card at given location (indexed from 0)
 		return hand.get(location);

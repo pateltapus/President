@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
 
+//TODO: Playing last set of cards gives a -1 out of bounds exception
+
 
 public class PresidentPanel extends JPanel{
 
@@ -17,6 +19,7 @@ public class PresidentPanel extends JPanel{
 	private static String cardBackPath, cardsPath;
 	private ArrayList<Integer> xMax, xMin;
 	private ArrayList<Card> cardQueue;
+	private ArrayList<Card> playedCards;
 	private PileLogic logicChecker;
 	private ArrayList<Boolean> raisedCards;
 
@@ -40,6 +43,8 @@ public class PresidentPanel extends JPanel{
 	private static final int PLAYBUTTONY = 489+0;
 	private static final int BUTTONWIDTH = 607*4/20;
 	private static final int BUTTONHEIGHT = 235*4/20;
+	private static final int PILEX = 415;
+	private static final int PILEY = 215;
 
 	//DEBUG------/
 	private int x,  y, z;
@@ -53,6 +58,7 @@ public class PresidentPanel extends JPanel{
 		z = 0;
 		//------------/
 
+		//this.updatePile = false;
 		this.cardBackPath = cardBackPath;
 		this.cardsPath = cardsPath;
 		this.xMax = new ArrayList<Integer>();
@@ -60,6 +66,7 @@ public class PresidentPanel extends JPanel{
 		this.cardQueue = new ArrayList<Card>();
 		this.logicChecker = new PileLogic();
 		this.raisedCards = new ArrayList<Boolean>();
+		this.playedCards = new ArrayList<Card>();
 
 		cardBackImages = new BufferedImage[cbROWS][cbCOLS]; //5 rows 3 columns,  ****ROWS PARSE DESIGN, COLS PARSE COLOR****
 		cardImages = new BufferedImage[cROWS][cCOLS] ;//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
@@ -120,23 +127,13 @@ public class PresidentPanel extends JPanel{
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
 
 		addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent me){
-				/* TODO:
-					Figure out best way to track mouseclicks with a variable amount of cards, potentially cards shifting as hand shrinks
-				*/
 				if(hasTurn){//hasTurn determines whether a click can be made, for now hard coded to 1, will be changed to a method from logic class
 				//bound farthest right x and lowest and highest y
 					cardClicker(me);
-					buttonClicker(me); //TODO: implement helper function below for button clicking
+					buttonClicker(me);
 					repaint();
 				}
 			}
@@ -148,9 +145,17 @@ public class PresidentPanel extends JPanel{
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
+		//TODO: FIX LOW GRAPHICS QUALITY ISSUE
+
+		//TODO: Find and implement a nice felt background
 		//g.drawImage(background, 0, 0, null);
 		
 		if(currentHand != null){
+			if(!playedCards.isEmpty()){
+				int k = 30;
+				for(int i = 0; i < playedCards.size(); i++)
+					g.drawImage(cardImages[3-playedCards.get(i).getSuit()][playedCards.get(i).getValue()-2], PILEX + k*i - playedCards.size()*8 , PILEY, WIDTH/2, HEIGHT/2, null);
+			}
 			if (logicChecker.checkPlayButton(cardQueue))
 				g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
 			else
@@ -160,11 +165,11 @@ public class PresidentPanel extends JPanel{
 				g.drawImage(passButton,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
 			else
 				g.drawImage(passButtonGrey,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
-
+			System.out.println("FLAG");
 			xMin.clear();
 			for(int i = 0; i < currentHand.getHandSize(); i++){
 				int j = 40; //change later for scaling
-				int k = 120; //change later for scaling
+				int k = 380 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
 				if(raisedCards.get(i))
 					g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY+DELTAY, WIDTH/2, HEIGHT/2, null); //140 190 
 				else
@@ -189,6 +194,7 @@ public class PresidentPanel extends JPanel{
 
 	//Helper functions
 	public void createXMax(){
+		xMax.clear();
 		for(int i = 0; i < xMin.size()-1; i++)
 			xMax.add(xMin.get(i+1));
 		xMax.add(xMin.get(xMin.size()-1)+WIDTH/2);
@@ -274,7 +280,29 @@ public class PresidentPanel extends JPanel{
 
 	//TODO: Implement button clicking
 	private void buttonClicker(MouseEvent me){
+		if(me.getX()>PLAYBUTTONX && me.getX()<PLAYBUTTONX+BUTTONWIDTH && me.getY()>PLAYBUTTONY && me.getY()<PLAYBUTTONY+BUTTONHEIGHT && logicChecker.checkPlayButton(cardQueue)){
+			if(logicChecker.checkPlay(cardQueue)){
+				playedCards.clear();
+				for(int i = 0; i < cardQueue.size(); i++){
+					playedCards.add(cardQueue.get(i));
+					raisedCards.remove(currentHand.getCardIndex(cardQueue.get(i)));
+					currentHand.removeCard(cardQueue.get(i));
+				}
+				cardQueue.clear();
+				if(currentHand.getHandSize() == 0){
+					//this player wins
+				}
 
+				//TODO:
+				//change turn
+			}
+		}
+		else if(me.getX()>PASSBUTTONX && me.getX()<PASSBUTTONX+BUTTONWIDTH  && me.getY()>PASSBUTTONY   && me.getY()<PASSBUTTONY+BUTTONHEIGHT  && logicChecker.checkPassButton(cardQueue)){
+			if(logicChecker.checkPass(cardQueue)){
+				//TODO:
+				//change turn
+			}
+		}
 	}
 
 	private void parseCards(){

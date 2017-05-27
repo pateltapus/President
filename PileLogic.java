@@ -4,6 +4,8 @@ import java.lang.StringBuilder;
 public class PileLogic{
 	private int pileValue;
 	private int passPlayCounter;
+
+	//TODO: Logic for comparing is wrong, 2 aces 1414, is higher than 3 6's 666, which it shouldnt be ****
 	
 	public PileLogic(){
 		this.pileValue = 0;
