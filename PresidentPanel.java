@@ -35,9 +35,9 @@ public class PresidentPanel extends JPanel{
 	private static final int INITY = 490;
 	private static final int DELTAY = -20;
 	private static final int PASSBUTTONX = 710;
-	private static final int PASSBUTTONY = 488+50;
+	private static final int PASSBUTTONY = 489+50;
 	private static final int PLAYBUTTONX = 710;
-	private static final int PLAYBUTTONY = 488+0;
+	private static final int PLAYBUTTONY = 489+0;
 	private static final int BUTTONWIDTH = 607*4/20;
 	private static final int BUTTONHEIGHT = 235*4/20;
 
@@ -144,16 +144,16 @@ public class PresidentPanel extends JPanel{
 									if(raisedCards.get(i+1)){ //if next card is raised
 										if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
 											System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
-											cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
-											raisedCards.set(i, false);
+												cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
+												raisedCards.set(i, false);
 											break;
 										}
 									}
 									else{ //if next card isnt raised
 										if((me.getX()>xMin.get(i) && me.getX()<xMax.get(i))||(me.getX()>xMin.get(i) && me.getX()<(xMin.get(i)+WIDTH/2) && me.getY()<INITY)){
 											System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
-											cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
-											raisedCards.set(i, false);
+												cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
+												raisedCards.set(i, false);
 											break;
 										}
 									}
@@ -168,6 +168,13 @@ public class PresidentPanel extends JPanel{
 										System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
 										if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(i))){
 											cardQueue.add(currentHand.getCardFromLoc(i));
+											raisedCards.set(i, true);
+										}
+										else{ //replacement for convenience of user
+											cardQueue.clear();
+											cardQueue.add(currentHand.getCardFromLoc(i));
+											for(int j = 0; j < raisedCards.size(); j++)
+												raisedCards.set(j, false);
 											raisedCards.set(i, true);
 										}
 										break;
@@ -195,6 +202,13 @@ public class PresidentPanel extends JPanel{
 									if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
 										cardQueue.add(currentHand.getCardFromLoc(xMin.size()-1));
 										raisedCards.set(xMin.size()-1, true);
+									}
+									else{
+										cardQueue.clear();
+										cardQueue.add(currentHand.getCardFromLoc(i));
+										for(int j = 0; j < raisedCards.size(); j++)
+											raisedCards.set(j, false);
+										raisedCards.set(i, true);
 									}
 									break;
 								}
