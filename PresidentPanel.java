@@ -135,88 +135,7 @@ public class PresidentPanel extends JPanel{
 				*/
 				if(hasTurn){//hasTurn determines whether a click can be made, for now hard coded to 1, will be changed to a method from logic class
 				//bound farthest right x and lowest and highest y
-					for(int i = 0; i< xMin.size()-1; i++){
-						
-							//bound each card	
-							
-							if(raisedCards.get(i)){ //card is raised
-								if(me.getY()>(INITY+DELTAY) && me.getY()<(INITY+HEIGHT/2+DELTAY)){ //50 pixels raise atm
-									if(raisedCards.get(i+1)){ //if next card is raised
-										if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
-											System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
-												cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
-												raisedCards.set(i, false);
-											break;
-										}
-									}
-									else{ //if next card isnt raised
-										if((me.getX()>xMin.get(i) && me.getX()<xMax.get(i))||(me.getX()>xMin.get(i) && me.getX()<(xMin.get(i)+WIDTH/2) && me.getY()<INITY)){
-											System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
-												cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
-												raisedCards.set(i, false);
-											break;
-										}
-									}
-
-
-								}
-							}
-
-							else{ //card is not raised
-								if(me.getY()>INITY && me.getY()<(INITY+HEIGHT/2)){
-									if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
-										System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
-										if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(i))){
-											cardQueue.add(currentHand.getCardFromLoc(i));
-											raisedCards.set(i, true);
-										}
-										else{ //replacement for convenience of user
-											cardQueue.clear();
-											cardQueue.add(currentHand.getCardFromLoc(i));
-											for(int j = 0; j < raisedCards.size(); j++)
-												raisedCards.set(j, false);
-											raisedCards.set(i, true);
-										}
-										break;
-									}									
-								}
-
-							}	
-						//hard code last card
-
-						if(me.getX()>xMin.get(xMin.size()-1) && me.getX()<xMax.get(xMax.size()-1)){
-							if(raisedCards.get(xMin.size()-1)){ //card is raised
-								if(me.getY()>(INITY+DELTAY) && me.getY()<(INITY+HEIGHT/2+DELTAY)){
-									System.out.println(currentHand.getCardFromLoc(xMin.size()-1).getValue() + " " + currentHand.getCardFromLoc(xMin.size()-1).getSuit());
-									if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
-										cardQueue.remove(currentHand.getCardFromLoc(xMin.size()-1));
-										raisedCards.set(xMin.size()-1, false);
-									}
-									break;
-								}
-
-							}
-							else{
-								if(me.getY()>INITY && me.getY()<(INITY+HEIGHT/2)){
-									System.out.println(currentHand.getCardFromLoc(xMin.size()-1).getValue() + " " + currentHand.getCardFromLoc(xMin.size()-1).getSuit());
-									if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
-										cardQueue.add(currentHand.getCardFromLoc(xMin.size()-1));
-										raisedCards.set(xMin.size()-1, true);
-									}
-									else{
-										cardQueue.clear();
-										cardQueue.add(currentHand.getCardFromLoc(i));
-										for(int j = 0; j < raisedCards.size(); j++)
-											raisedCards.set(j, false);
-										raisedCards.set(i, true);
-									}
-									break;
-								}
-							}
-
-						}
-	
-					}
+					cardClicker(me);
 					repaint();
 				}
 			}
@@ -278,6 +197,85 @@ public class PresidentPanel extends JPanel{
 		
 	}
 
+	//Helper functions
+
+	private void cardClicker(MouseEvent me){
+		for(int i = 0; i< xMin.size()-1; i++){					
+			//bound each card			
+			if(raisedCards.get(i)){ //card is raised
+				if(me.getY()>(INITY+DELTAY) && me.getY()<(INITY+HEIGHT/2+DELTAY)){ //50 pixels raise atm
+					if(raisedCards.get(i+1)){ //if next card is raised
+						if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
+							System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
+								cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
+								raisedCards.set(i, false);
+							break;
+						}
+					}
+					else{ //if next card isnt raised
+						if((me.getX()>xMin.get(i) && me.getX()<xMax.get(i))||(me.getX()>xMin.get(i) && me.getX()<(xMin.get(i)+WIDTH/2) && me.getY()<INITY)){
+							System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
+								cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
+								raisedCards.set(i, false);
+							break;
+						}
+					}
+				}
+			}
+
+			else{ //card is not raised
+				if(me.getY()>INITY && me.getY()<(INITY+HEIGHT/2)){
+					if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
+						System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
+						if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(i))){
+							cardQueue.add(currentHand.getCardFromLoc(i));
+							raisedCards.set(i, true);
+						}
+						else{ //replacement for convenience of user
+							cardQueue.clear();
+							cardQueue.add(currentHand.getCardFromLoc(i));
+							for(int j = 0; j < raisedCards.size(); j++)
+								raisedCards.set(j, false);
+							raisedCards.set(i, true);
+						}
+						break;
+					}									
+				}
+
+			}	
+		}
+
+		//hard code last card
+		if(me.getX()>xMin.get(xMin.size()-1) && me.getX()<xMax.get(xMax.size()-1)){
+			if(raisedCards.get(xMin.size()-1)){ //card is raised
+				if(me.getY()>(INITY+DELTAY) && me.getY()<(INITY+HEIGHT/2+DELTAY)){
+					System.out.println(currentHand.getCardFromLoc(xMin.size()-1).getValue() + " " + currentHand.getCardFromLoc(xMin.size()-1).getSuit());
+					if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
+						cardQueue.remove(currentHand.getCardFromLoc(xMin.size()-1));
+						raisedCards.set(xMin.size()-1, false);
+					}
+				}
+
+			}
+			else{
+				if(me.getY()>INITY && me.getY()<(INITY+HEIGHT/2)){
+					System.out.println(currentHand.getCardFromLoc(xMin.size()-1).getValue() + " " + currentHand.getCardFromLoc(xMin.size()-1).getSuit());
+					if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
+						cardQueue.add(currentHand.getCardFromLoc(xMin.size()-1));
+						raisedCards.set(xMin.size()-1, true);
+					}
+					else{
+						cardQueue.clear();
+						cardQueue.add(currentHand.getCardFromLoc(xMin.size()-1));
+						for(int j = 0; j < raisedCards.size(); j++)
+							raisedCards.set(j, false);
+						raisedCards.set(xMin.size()-1, true);
+					}
+				}
+			}
+
+		}
+	}
 	private void parseCards(){
 		//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
 
