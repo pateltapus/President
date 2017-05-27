@@ -1,4 +1,3 @@
-
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 public class PresidentPanel extends JPanel{
 
-	private BufferedImage cardBackSS, cardsSS;
+	private BufferedImage cardBackSS, cardsSS, playButton, playButtonGrey, passButton, passButtonGrey, background;
 	private BufferedImage[][] cardBackImages, cardImages;
 	private static String cardBackPath, cardsPath;
 	private ArrayList<Integer> xMax, xMin;
@@ -35,6 +34,12 @@ public class PresidentPanel extends JPanel{
 
 	private static final int INITY = 490;
 	private static final int DELTAY = -20;
+	private static final int PASSBUTTONX = 710;
+	private static final int PASSBUTTONY = 485+50;
+	private static final int PLAYBUTTONX = 710;
+	private static final int PLAYBUTTONY = 485+0;
+	private static final int BUTTONWIDTH = 607*4/20;
+	private static final int BUTTONHEIGHT = 235*4/20;
 
 	//DEBUG------/
 	private int x,  y, z;
@@ -81,6 +86,39 @@ public class PresidentPanel extends JPanel{
 		catch(Exception e){
 			System.out.println("Exception in Cards Spritesheet load" + e.toString());
 		}
+		
+		try{
+			playButton = ImageIO.read(new File("Images/Buttons/playButton.png"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in playButton" + e.toString());
+		}
+		try{
+			passButton = ImageIO.read(new File("Images/Buttons/passButton.png"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in passButton" + e.toString());
+		}
+		try{
+			playButtonGrey = ImageIO.read(new File("Images/Buttons/playButtonGrey.png"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in playButtonGrey" + e.toString());
+		}
+		try{
+			passButtonGrey = ImageIO.read(new File("Images/Buttons/passButtonGrey.png"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in passButtonGrey" + e.toString());
+		}
+		try{
+			background = ImageIO.read(new File("Images/Background.jpg"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in background" + e.toString());
+		}
+		
+		
 		
 		
 		
@@ -176,7 +214,12 @@ public class PresidentPanel extends JPanel{
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
+		//g.drawImage(background, 0, 0, null);
+		
 		if(currentHand != null){
+			g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+			g.drawImage(passButton,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+		
 			xMin.clear();
 			for(int i = 0; i < currentHand.getHandSize(); i++){
 				int j = 25; //change later for scaling
@@ -298,5 +341,5 @@ public class PresidentPanel extends JPanel{
 		}
 	}
 	//---------/
-	
+
 }
