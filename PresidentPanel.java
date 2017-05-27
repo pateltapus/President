@@ -35,9 +35,9 @@ public class PresidentPanel extends JPanel{
 	private static final int INITY = 490;
 	private static final int DELTAY = -20;
 	private static final int PASSBUTTONX = 710;
-	private static final int PASSBUTTONY = 485+50;
+	private static final int PASSBUTTONY = 488+50;
 	private static final int PLAYBUTTONX = 710;
-	private static final int PLAYBUTTONY = 485+0;
+	private static final int PLAYBUTTONY = 488+0;
 	private static final int BUTTONWIDTH = 607*4/20;
 	private static final int BUTTONHEIGHT = 235*4/20;
 
@@ -217,9 +217,16 @@ public class PresidentPanel extends JPanel{
 		//g.drawImage(background, 0, 0, null);
 		
 		if(currentHand != null){
-			g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
-			g.drawImage(passButton,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
-		
+			if (logicChecker.checkPlayButton(cardQueue))
+				g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+			else
+				g.drawImage(playButtonGrey,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+			
+			if (logicChecker.checkPassButton(cardQueue))
+				g.drawImage(passButton,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+			else
+				g.drawImage(passButtonGrey,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+
 			xMin.clear();
 			for(int i = 0; i < currentHand.getHandSize(); i++){
 				int j = 25; //change later for scaling

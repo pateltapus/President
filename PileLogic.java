@@ -70,8 +70,8 @@ public class PileLogic{
 			}
 		*/
 
-		
-		if(Integer.parseInt(queuePowerString) > pileValue){ //currently doesnt handle equal since the prev will
+		int powerValue = (queuePowerString.equals("")) ? 0 : Integer.parseInt(queuePowerString);
+		if(powerValue > pileValue){ //currently doesnt handle equal since the prev will
 			this.pileValue = Integer.parseInt(queuePowerString);
 			this.passPlayCounter = 0;
 			return true;
@@ -98,9 +98,9 @@ public class PileLogic{
 		
 		for(int i = 0; i < queuedCards.size(); i++)
 			queuePower.append(Integer.toString(queuedCards.get(i).getValue()));
-		
+		//System.out.println("queuePower: " + queuePower);
 		String queuePowerString = queuePower.toString();
-
+		//System.out.println("queuePowerString: " + queuePowerString);
 			
 		//can deal with finishing a set here at a later time
 		//take append the two strings and check if it is 4x a single number
@@ -115,8 +115,10 @@ public class PileLogic{
 				return true;
 		*/
 
-		
-		if(Integer.parseInt(queuePowerString) > pileValue) //currently doesnt handle equal since the prev will
+		int powerValue = (queuePowerString.equals("")) ? 0 : Integer.parseInt(queuePowerString);
+		//System.out.println("powerValue: " + powerValue);
+
+		if(powerValue > pileValue) //currently doesnt handle equal since the prev will
 			return true;
 		else
 			return false;
