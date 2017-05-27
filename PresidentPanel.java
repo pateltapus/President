@@ -136,6 +136,7 @@ public class PresidentPanel extends JPanel{
 				if(hasTurn){//hasTurn determines whether a click can be made, for now hard coded to 1, will be changed to a method from logic class
 				//bound farthest right x and lowest and highest y
 					cardClicker(me);
+					buttonClicker(me); //TODO: implement helper function below for button clicking
 					repaint();
 				}
 			}
@@ -175,17 +176,6 @@ public class PresidentPanel extends JPanel{
 	}
 
 	
-	public void createXMax(){
-		for(int i = 0; i < xMin.size()-1; i++)
-			xMax.add(xMin.get(i+1));
-		xMax.add(xMin.get(xMin.size()-1)+WIDTH/2);
-	}
-
-
-
-
-
-
 
 
 
@@ -198,6 +188,11 @@ public class PresidentPanel extends JPanel{
 	}
 
 	//Helper functions
+	public void createXMax(){
+		for(int i = 0; i < xMin.size()-1; i++)
+			xMax.add(xMin.get(i+1));
+		xMax.add(xMin.get(xMin.size()-1)+WIDTH/2);
+	}
 
 	private void cardClicker(MouseEvent me){
 		for(int i = 0; i< xMin.size()-1; i++){					
@@ -276,6 +271,12 @@ public class PresidentPanel extends JPanel{
 
 		}
 	}
+
+	//TODO: Implement button clicking
+	private void buttonClicker(MouseEvent me){
+
+	}
+
 	private void parseCards(){
 		//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
 
