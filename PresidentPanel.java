@@ -229,8 +229,8 @@ public class PresidentPanel extends JPanel{
 
 			xMin.clear();
 			for(int i = 0; i < currentHand.getHandSize(); i++){
-				int j = 25; //change later for scaling
-				int k = 245; //change later for scaling
+				int j = 40; //change later for scaling
+				int k = 120; //change later for scaling
 				if(raisedCards.get(i))
 					g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY+DELTAY, WIDTH/2, HEIGHT/2, null); //140 190 
 				else
