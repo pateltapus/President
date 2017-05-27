@@ -11,12 +11,13 @@ public class PileLogic{
 	}
 	
 	public boolean checkClick (ArrayList<Card> queuedCards, Card chosenCard){
-		if(queuedCards.size()==1 && queuedCards.get(0).getValue()==2 && chosenCard.getValue()==2) //account for 2's
+
+		if(queuedCards.size()==1 && queuedCards.get(0).getValue()==2 && chosenCard.getValue()==2 && chosenCard.getSuit()!=queuedCards.get(0).getSuit()) //account for 2's
 			return false;
 			
-		for(int i = 1; i< queuedCards.size(); i++){
+		for(int i = 0; i< queuedCards.size(); i++){
 			if(chosenCard.getValue() != queuedCards.get(i).getValue())
-			return false;
+				return false;
 		}
 		return true;
 	}
