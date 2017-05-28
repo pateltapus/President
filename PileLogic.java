@@ -1,15 +1,15 @@
 import java.util.ArrayList;
-import java.lang.StringBuilder;
 
 public class PileLogic{
 	private int pileValue;
 	private int passPlayCounter;
+	private int pileCount;
 
-	//TODO: Logic for comparing is wrong, 2 aces 1414, is higher than 3 6's 666, which it shouldnt be ****
 	
 	public PileLogic(){
-		this.pileValue = 0;
+		this.pileValue = 1;
 		this.passPlayCounter = 0;
+		this.pileCount = 0;
 	}
 	
 	public boolean checkClick (ArrayList<Card> queuedCards, Card chosenCard){
@@ -27,6 +27,7 @@ public class PileLogic{
 	public void checkRefresh(){ //called at the start of a turn
 		if(this.passPlayCounter == 3)
 			this.pileValue = 0;
+			this.pileCount = 1;
 	}
 	
 	public boolean checkWin(ArrayList<Card> hand){
@@ -43,17 +44,12 @@ public class PileLogic{
 	}
 	
 	public boolean checkPlay (ArrayList<Card> queuedCards){
-		StringBuilder queuePower = new StringBuilder();
 		if(((queuedCards.size() == 1 && queuedCards.get(0).getValue()==2) || queuedCards.size()==4)){
 			this.pileValue = 0;
 			this.passPlayCounter = 0;
+			this.pileCount = 1;
 			return true;
 		}
-		for(int i = 0; i < queuedCards.size(); i++)
-			queuePower.append(Integer.toString(queuedCards.get(i).getValue()));
-
-		String queuePowerString = queuePower.toString();
-
 			
 		//can deal with finishing a set here at a later time
 		//take append the two strings and check if it is 4x a single number
@@ -71,11 +67,13 @@ public class PileLogic{
 				return true;
 			}
 		*/
-
-		int powerValue = (queuePowerString.equals("")) ? 0 : Integer.parseInt(queuePowerString);
-		if(powerValue > pileValue){ //currently doesnt handle equal since the prev will
-			this.pileValue = Integer.parseInt(queuePowerString);
+		int powerValue = 0;
+		if(!queuedCards.isEmpty())
+			powerValue = queuedCards.get(0).getValue();
+		if((powerValue > pileValue && queuedCards.size()==pileCount)||(queuedCards.size()>pileCount)){ //currently doesnt handle equal since the prev will
+			this.pileValue = powerValue;
 			this.passPlayCounter = 0;
+			this.pileCount = queuedCards.size();
 			return true;
 		}
 		else{
@@ -94,15 +92,8 @@ public class PileLogic{
 	}
 	
 	public boolean checkPlayButton (ArrayList<Card> queuedCards){
-		StringBuilder queuePower = new StringBuilder();
 		if(((queuedCards.size() == 1 && queuedCards.get(0).getValue()==2) || queuedCards.size()==4))
 			return true;
-		
-		for(int i = 0; i < queuedCards.size(); i++)
-			queuePower.append(Integer.toString(queuedCards.get(i).getValue()));
-		//System.out.println("queuePower: " + queuePower);
-		String queuePowerString = queuePower.toString();
-		//System.out.println("queuePowerString: " + queuePowerString);
 			
 		//can deal with finishing a set here at a later time
 		//take append the two strings and check if it is 4x a single number
@@ -113,14 +104,17 @@ public class PileLogic{
 			for(int i = 0; i < 4; i++){
 				fourOfAKind.append(queuedCards.get(0));
 			}
-			if(checkFour == fourOfAKind)
+			if(checkFour == fourOfAKind){
+				this.pileValue = 0;
+				this.passPlayCounter = 0;
+				this.playerTurn = playerTurn;
 				return true;
+			}
 		*/
-
-		int powerValue = (queuePowerString.equals("")) ? 0 : Integer.parseInt(queuePowerString);
-		//System.out.println("powerValue: " + powerValue);
-
-		if(powerValue > pileValue) //currently doesnt handle equal since the prev will
+		int powerValue = 0;
+		if(!queuedCards.isEmpty())
+			powerValue = queuedCards.get(0).getValue();
+		if((powerValue > pileValue && queuedCards.size()==pileCount)||(queuedCards.size()>pileCount)) //currently doesnt handle equal since the prev will
 			return true;
 		else
 			return false;

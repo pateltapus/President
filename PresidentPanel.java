@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
 
-//TODO: Playing last set of cards gives a -1 out of bounds exception
+//TODO: Playing last set of cards gives a -1 out of bounds exception, also 2's and 4 of a kind should clear the pile not print them
 
 
 public class PresidentPanel extends JPanel{
@@ -180,16 +180,11 @@ public class PresidentPanel extends JPanel{
 		}
 	}
 
-	
-
-
-
 	public void renderAHand(Hand handPrint){
 		currentHand = handPrint;
 		for(int i = 0; i < currentHand.getHandSize(); i++)
 			raisedCards.add(false);
-		repaint();
-		
+		repaint();	
 	}
 
 	//Helper functions
