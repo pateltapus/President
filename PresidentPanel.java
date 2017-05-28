@@ -9,9 +9,6 @@ import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
 
-//TODO: Playing last set of cards gives a -1 out of bounds exception
-
-
 public class PresidentPanel extends JPanel{
 
 	private BufferedImage cardBackSS, cardsSS, playButton, playButtonGrey, passButton, passButtonGrey, background;
@@ -170,17 +167,19 @@ public class PresidentPanel extends JPanel{
 			else
 				g.drawImage(passButtonGrey,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
 			System.out.println("FLAG");
-			xMin.clear();
-			for(int i = 0; i < currentHand.getHandSize(); i++){
-				int j = 40; //change later for scaling
-				int k = 380 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
-				if(raisedCards.get(i))
-					g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY+DELTAY, WIDTH/2, HEIGHT/2, null); //140 190 
-				else
-					g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY, WIDTH/2, HEIGHT/2, null); //140 190 
-				xMin.add(i*j+k);
+			if(currentHand.getHandSize() != 0){
+				xMin.clear();
+				for(int i = 0; i < currentHand.getHandSize(); i++){
+					int j = 40; //change later for scaling
+					int k = 380 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
+					if(raisedCards.get(i))
+						g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY+DELTAY, WIDTH/2, HEIGHT/2, null); //140 190 
+					else
+						g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY, WIDTH/2, HEIGHT/2, null); //140 190 
+					xMin.add(i*j+k);
+				}
+				createXMax();
 			}
-			createXMax();
 		}
 	}
 
