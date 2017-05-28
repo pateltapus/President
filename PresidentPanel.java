@@ -116,7 +116,7 @@ public class PresidentPanel extends JPanel{
 			System.out.println("Exception in passButtonGrey" + e.toString());
 		}
 		try{
-			background = ImageIO.read(new File("Images/Background.jpg"));
+			background = ImageIO.read(new File("Images/Background.png"));
 		}
 		catch(Exception e){
 			System.out.println("Exception in background" + e.toString());
@@ -145,7 +145,7 @@ public class PresidentPanel extends JPanel{
 		//TODO: FIX LOW GRAPHICS QUALITY ISSUE
 
 		//TODO: Find and implement a nice felt background
-		//g.drawImage(background, 0, 0, null);
+		g.drawImage(background, 0, 0, null);
 		
 		if(currentHand != null){
 			if(!playedCards.isEmpty()){
