@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
 
-//TODO: Playing last set of cards gives a -1 out of bounds exception, also 2's and 4 of a kind should clear the pile not print them
+//TODO: Playing last set of cards gives a -1 out of bounds exception
 
 
 public class PresidentPanel extends JPanel{
@@ -152,9 +152,13 @@ public class PresidentPanel extends JPanel{
 		
 		if(currentHand != null){
 			if(!playedCards.isEmpty()){
-				int k = 30;
-				for(int i = 0; i < playedCards.size(); i++)
-					g.drawImage(cardImages[3-playedCards.get(i).getSuit()][playedCards.get(i).getValue()-2], PILEX + k*i - playedCards.size()*8 , PILEY, WIDTH/2, HEIGHT/2, null);
+				if(playedCards.get(0).getValue() !=2 && !(playedCards.size()==4)){
+					if(!playedCards.isEmpty()){
+						int k = 30;
+						for(int i = 0; i < playedCards.size(); i++)
+							g.drawImage(cardImages[3-playedCards.get(i).getSuit()][playedCards.get(i).getValue()-2], PILEX + k*i - playedCards.size()*8 , PILEY, WIDTH/2, HEIGHT/2, null);
+					}
+				}
 			}
 			if (logicChecker.checkPlayButton(cardQueue))
 				g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
