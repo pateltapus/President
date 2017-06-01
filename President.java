@@ -18,7 +18,7 @@ public class President{
 		names.add("Bill");
 		
 		//1.)	//Create player list for number of players and name them
-		
+		//will happen through SQL
 		
 		//2.)	//deal cards to them and sort them
 		setup(names);

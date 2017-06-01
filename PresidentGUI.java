@@ -50,6 +50,7 @@ public class PresidentGUI extends JFrame{
 		//DEBUG
 		
 		//jpanel.animate();
+
 		
 	}
 	

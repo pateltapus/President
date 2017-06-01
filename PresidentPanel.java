@@ -41,7 +41,7 @@ public class PresidentPanel extends JPanel{
 	private static final int BUTTONWIDTH = 607*4/20;
 	private static final int BUTTONHEIGHT = 235*4/20;
 	private static final int PILEX = 415;
-	private static final int PILEY = 215;
+	private static final int PILEY = 235;//215
 
 	//DEBUG------/
 	private int x,  y, z;
@@ -285,7 +285,9 @@ public class PresidentPanel extends JPanel{
 					playedCards.add(cardQueue.get(i));
 					raisedCards.remove(currentHand.getCardIndex(cardQueue.get(i)));
 					currentHand.removeCard(cardQueue.get(i));
+
 				}
+				currentHand.sortHand();
 				cardQueue.clear();
 				if(currentHand.getHandSize() == 0){
 					//this player wins
