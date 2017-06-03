@@ -40,8 +40,9 @@ public class PresidentGUI extends JFrame{
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 
+		//create loadscreen
+
 		jpanel = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
-		jpanel.setBackground(Color.GREEN);
 		this.add(jpanel);
 
 		this.setVisible(true);
