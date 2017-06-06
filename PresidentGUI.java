@@ -26,7 +26,12 @@ public class PresidentGUI extends JFrame{
 	private static final int HEIGHT = WIDTH/12*9;
 	private static final String NAME = "President";
 
-	private PresidentPanel jpanel;
+	private Loadscreen jpanelLoad;
+	private Namescreen jpanelName;
+	private Waitscreen jpanelWait;
+	private PresidentPanel jpanelGame;
+	private String name = "";
+	private boolean playersFound = false;
 
 	public PresidentGUI(){
 
@@ -41,11 +46,48 @@ public class PresidentGUI extends JFrame{
 		this.setLocationRelativeTo(null);
 
 		//create loadscreen
-
-		jpanel = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
-		this.add(jpanel);
-
+		jpanelLoad = new Loadscreen();
+		this.add(jpanelLoad);
 		this.setVisible(true);
+
+		boolean lobbyJoined = false;
+
+		while(lobbyJoined == false){
+			lobbyJoined = jpanelLoad.getLobbyJoined();
+		}
+
+		this.remove(jpanelLoad);
+
+		//create namescreen
+		jpanelName = new Namescreen();
+		jpanelName.addTextField();
+		this.add(jpanelName);
+		this.setVisible(true);
+
+		while(name.equals("")){
+			name = jpanelName.getName();
+		}
+
+		this.remove(jpanelName);
+
+		//create waitscreen
+
+		jpanelWait = new Waitscreen();
+		this.add(jpanelWait);
+		this.setVisible(true);
+
+		while(!playersFound){
+			;
+		}
+
+		this.remove(jpanelWait);
+
+
+
+
+
+
+		
 
 
 		//DEBUG
@@ -54,10 +96,21 @@ public class PresidentGUI extends JFrame{
 
 		
 	}
+
+	public String getName(){
+		return name;
+	}
+
+	public void setPlayersFound(){
+		this.playersFound = true;
+	}
 	
 	//DEBUG
 	public void renderHandOnScreen(Player[] playerList){
-		jpanel.renderAHand(playerList[0].getHand());
+		jpanelGame = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
+		this.add(jpanelGame);
+		this.setVisible(true);
+		jpanelGame.renderAHand(playerList[0].getHand());
 	}
 
 }

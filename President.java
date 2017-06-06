@@ -26,15 +26,15 @@ public class President{
 
 		
 		//3.)Communicate data to and from PresidentGUI
-		newGame.renderHandOnScreen(playerList);
+		//newGame.renderHandOnScreen(playerList);
 		
 
 
 	}
 
-	public static void gameLoop(){
+/*	public static void gameLoop(){
 		//gameloop
-	}
+	}*/
 
 	public static void deal(){//pass static array of Players
 		Deck deck = new Deck();
