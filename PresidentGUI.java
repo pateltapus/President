@@ -77,7 +77,8 @@ public class PresidentGUI extends JFrame{
 		this.setVisible(true);
 
 		while(!playersFound){
-			;
+			jpanelWait.incrementCount();
+			jpanelWait.repaint();
 		}
 
 		this.remove(jpanelWait);
