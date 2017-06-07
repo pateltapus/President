@@ -44,8 +44,6 @@ public class President{
 		after this is implemented, begin working on code for game player
 
 */
-
-
 		//DEBUG
 		setup(names);
 		printCardsToOutput();
