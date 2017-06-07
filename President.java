@@ -12,23 +12,43 @@ public class President{
 		PresidentGUI newGame = new PresidentGUI();
 		//Get names into an ArrayList
 		ArrayList<String> names = new ArrayList<String>();
-		names.add("Joe");
+/*		names.add("Joe");
 		names.add("Sam");
 		names.add("Linda");
-		names.add("Bill");
+		names.add("Bill");*/
+/*		
+		PSEUDOCODE FOR SQL COMMUNICATION AND GAMESTATE: 
+
+		Server sqlServer = new Server();
+		send newGame.getName() to sql
+
 		
-		//1.)	//Create player list for number of players and name them
-		//will happen through SQL
-		
-		//2.)	//deal cards to them and sort them
+		if(the four people aren't in sql server){
+			newGame.createWaitScreen();
+			while(keep checking server for four people){
+				newGame.updateWaitScreen();
+			}
+			newGame.closeWaitScreen();
+		}
+		else{
+			setup and deal cards to everyone and send them to sql in a new table used just for getting inital cards
+			(will have to change current setup)
+		}
+		for(int i = 0; i < 4; i++){
+			add each name from SQL to arrayList name
+		}
+		rearrange the array list so that the current player is at the top,but the order is kept proper
+		assign the first player to enter SQL lobby as turn 1 and go in order from there.
+
+		NEXT STEP:
+		after this is implemented, begin working on code for game player
+
+*/
+
+
+		//DEBUG
 		setup(names);
 		printCardsToOutput();
-
-		
-		//3.)Communicate data to and from PresidentGUI
-		//newGame.renderHandOnScreen(playerList);
-		
-
 
 	}
 

@@ -70,27 +70,6 @@ public class PresidentGUI extends JFrame{
 
 		this.remove(jpanelName);
 
-		//create waitscreen
-
-		jpanelWait = new Waitscreen();
-		this.add(jpanelWait);
-		this.setVisible(true);
-
-		while(!playersFound){
-			jpanelWait.incrementCount();
-			jpanelWait.repaint();
-		}
-
-		this.remove(jpanelWait);
-
-
-
-
-
-
-		
-
-
 		//DEBUG
 		
 		//jpanel.animate();
@@ -106,12 +85,29 @@ public class PresidentGUI extends JFrame{
 		this.playersFound = true;
 	}
 	
+	public void createWaitScreen(){
+		//create waitscreen
+
+		jpanelWait = new Waitscreen();
+		this.add(jpanelWait);
+		this.setVisible(true);
+	}
+
+	public void updateWaitScreen(){
+		jpanelWait.incrementCount();
+		jpanelWait.repaint();
+	}
+
+	public void closeWaitScreen(){
+		this.remove(jpanelWait);
+	}
+
 	//DEBUG
-	public void renderHandOnScreen(Player[] playerList){
+	public void renderHandOnScreen(Player[] playerList, int playerNum){
 		jpanelGame = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
 		this.add(jpanelGame);
 		this.setVisible(true);
-		jpanelGame.renderAHand(playerList[0].getHand());
+		jpanelGame.renderAHand(playerList[playerNum].getHand());
 	}
 
 }
