@@ -3,7 +3,7 @@ import java.sql.*;
 
 class Server
 {  
-       public Server() {  
+    public Server() {  
        try { 
             // Load the SQLServerDriver class, build the 
             // connection string, and get a connection 
@@ -37,4 +37,20 @@ class Server
             System.exit(0);  
        } 
     } 
+
+    public void sendDataCol(String column){
+    	
+    }
+
+    public void readDataCol(String column){
+
+    }
+
+    public void sendDataCell(int cell){
+
+    }
+
+    public void readDataCell(int cell){
+    	String SQL = "SELECT "
+    }
 }
