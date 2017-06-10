@@ -45,7 +45,8 @@ public class Waitscreen extends JPanel {
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
-		switch(count/500000%4){
+		System.out.println(count);
+		switch(count/1500%4){
 			case 0: g.drawImage(waitscreenImg0, 0, 0, null);
 					break;
 

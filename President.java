@@ -16,6 +16,35 @@ public class President{
 		names.add("Sam");
 		names.add("Linda");
 		names.add("Bill");*/
+		Server sqlServer = new Server();
+		//System.out.println("FLAG1");
+		sqlServer.createPlayer(newGame.getName());
+		int orderNum = sqlServer.getRows();
+		System.out.println("FLAG2");
+
+		if(sqlServer.getRows() == 1){
+			sqlServer.dealCards();
+		}
+		System.out.println("FLAG3");
+
+		if(sqlServer.getRows()<4){
+			newGame.createWaitScreen();
+			while(sqlServer.getRows()<4){
+				newGame.updateWaitScreen();
+			}
+			newGame.closeWaitScreen();
+		}
+
+		Player currPlayer = new Player();
+		for(int i = 0; i < 13; i++){
+			currPlayer.getHand().addCard(new Card())
+		}
+
+
+		
+		
+		
+		
 /*		
 		PSEUDOCODE FOR SQL COMMUNICATION AND GAMESTATE: 
 
@@ -30,10 +59,7 @@ public class President{
 			}
 			newGame.closeWaitScreen();
 		}
-		else{
-			setup and deal cards to everyone and send them to sql in a new table used just for getting inital cards
-			(will have to change current setup)
-		}
+
 		for(int i = 0; i < 4; i++){
 			add each name from SQL to arrayList name
 		}
