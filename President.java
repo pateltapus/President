@@ -17,15 +17,12 @@ public class President{
 		names.add("Linda");
 		names.add("Bill");*/
 		Server sqlServer = new Server();
-		//System.out.println("FLAG1");
 		sqlServer.createPlayer(newGame.getName());
 		int orderNum = sqlServer.getRows();
-		System.out.println("FLAG2");
 
 		if(sqlServer.getRows() == 1){
 			sqlServer.dealCards();
 		}
-		System.out.println("FLAG3");
 
 		if(sqlServer.getRows()<4){
 			newGame.createWaitScreen();
@@ -35,10 +32,28 @@ public class President{
 			newGame.closeWaitScreen();
 		}
 
-		Player currPlayer = new Player();
-		for(int i = 0; i < 13; i++){
-			currPlayer.getHand().addCard(new Card())
+		Player currPlayer = new Player(newGame.getName());
+
+		for(int i = 1; i < 14; i++){
+			currPlayer.getHand().addCard(new Card(sqlServer.getInitCards(orderNum, "Num", i), sqlServer.getInitCards(orderNum, "Suit", i)));
 		}
+
+		int otherPlayers[] = new int[3];
+
+		int mod = orderNum + 1;
+
+		for(int i = 1; i < 4; i++){
+			if(orderNum + i >= 5)
+				otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum + i - 4);
+			else
+				otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum+i);
+		}
+
+		newGame.renderHandOnScreen(currPlayer, otherPlayers);
+
+
+
+
 
 
 		
@@ -71,8 +86,8 @@ public class President{
 
 */
 		//DEBUG
-		setup(names);
-		printCardsToOutput();
+		//setup(names);
+		//printCardsToOutput();
 
 	}
 
@@ -115,13 +130,10 @@ public class President{
 /***********************************************
 	DEBUG
 ***********************************************/
-	public static void printCardsToOutput(){ //tests if deal is working and outputs the hands
-
-		for(int i = 0; i < 4; i++){
-			System.out.print(playerList[i].getName() + "\n");
+	public static void printCardsToOutput(Player currPlayer){ //tests if deal is working and outputs the hands
 
 			for(int j = 0; j < 13; j++){
-				switch(playerList[i].getHand().getCardFromLoc(j).getValue()){
+				switch(currPlayer.getHand().getCardFromLoc(j).getValue()){
 					case 11:	System.out.print("Jack");
 								break;
 					case 12:	System.out.print("Queen");
@@ -130,13 +142,13 @@ public class President{
 								break;
 					case 14:	System.out.print("Ace");
 								break;
-					default:	System.out.print(playerList[i].getHand().getCardFromLoc(j).getValue());
+					default:	System.out.print(currPlayer.getHand().getCardFromLoc(j).getValue());
 								break;
 				}
 
 				System.out.print(" of ");
 
-				switch(playerList[i].getHand().getCardFromLoc(j).getSuit()){
+				switch(currPlayer.getHand().getCardFromLoc(j).getSuit()){
 					case 0: System.out.print("Spades");
 							break;
 					case 1: System.out.print("Hearts");
@@ -150,5 +162,5 @@ public class President{
 			}
 			System.out.print("\n");
 		}
-	}
+
 }
