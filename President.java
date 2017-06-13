@@ -38,6 +38,10 @@ public class President{
 			currPlayer.getHand().addCard(new Card(sqlServer.getInitCards(orderNum, "Num", i), sqlServer.getInitCards(orderNum, "Suit", i)));
 		}
 
+
+
+
+
 		int otherPlayers[] = new int[3];
 
 		int mod = orderNum + 1;
@@ -50,6 +54,9 @@ public class President{
 		}
 
 		newGame.renderHandOnScreen(currPlayer, otherPlayers);
+
+		if(orderNum == 4) //clear initial hands once each local machine has them
+			sqlServer.clearHandTable();
 
 
 

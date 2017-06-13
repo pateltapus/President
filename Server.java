@@ -68,9 +68,21 @@ class Server
 		return value;
     }
     
-    public void clearTable(){
+    public void clearPresTable(){
     	try{
 	    	String SQL = "DELETE FROM PresidentTable";
+	    	Statement stmt = con.createStatement();
+			stmt.executeUpdate(SQL);
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			System.exit(0);
+		}
+    }
+
+    public void clearHandTable(){
+    	try{
+	    	String SQL = "DELETE FROM InitialHands";
 	    	Statement stmt = con.createStatement();
 			stmt.executeUpdate(SQL);
 		}

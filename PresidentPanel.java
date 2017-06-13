@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 
 public class PresidentPanel extends JPanel{
@@ -19,6 +20,7 @@ public class PresidentPanel extends JPanel{
 	private ArrayList<Card> playedCards;
 	private PileLogic logicChecker;
 	private ArrayList<Boolean> raisedCards;
+	private int[] otherHands;
 
 
 	private Hand currentHand;
@@ -32,8 +34,19 @@ public class PresidentPanel extends JPanel{
 	private static final int WIDTH = 140;
 	private static final int HEIGHT = 190;
 
+	//p1
 	private static final int INITY = 490;
 	private static final int DELTAY = -20;
+
+	//p2
+	private static final int INITX2;
+
+	//p3
+	private static final int INITY3 = 100;
+
+	//p4
+	private static final int INITX4;
+
 	private static final int PASSBUTTONX = 710;
 	private static final int PASSBUTTONY = 489+50;
 	private static final int PLAYBUTTONX = 710;
@@ -146,6 +159,32 @@ public class PresidentPanel extends JPanel{
 
 		//TODO: Find and implement a nice felt background
 		g.drawImage(background, 0, 0, null);
+
+		//print other hands
+
+			//left
+/*			for(int i = 0; i < otherHands[0]; i++){
+				int j = 40; //change later for scaling
+				int k = 380 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
+					g.drawImage(cardBackImages[0][0], i*j+k, INITX2, WIDTH/2, HEIGHT/2, null); //140 190 
+			}*/
+
+			//top
+			for(int i = 0; i < otherHands[1]; i++){
+				int j = 40; //change later for scaling
+				int k = 380 - otherHands[1]*20; //change later for scaling, 120 for 13 cards
+					g.drawImage(cardBackImages[0][0], i*j+k, INITY3, WIDTH/2, HEIGHT/2, null); //140 190 
+			}
+/*
+			//right
+			for(int i = 0; i < otherHands[2]; i++){
+				int j = 40; //change later for scaling
+				int k = 380 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
+					g.drawImage(cardBackImages[0][0], i*j+k, INITX4, WIDTH/2, HEIGHT/2, null); //140 190 
+			}*/
+
+
+		//print our hand
 		
 		if(currentHand != null){
 			if(!playedCards.isEmpty()){
@@ -183,8 +222,9 @@ public class PresidentPanel extends JPanel{
 		}
 	}
 
-	public void renderAHand(Hand handPrint){
+	public void renderAHand(Hand handPrint, int[] otherPlayers){
 		currentHand = handPrint;
+		otherHands = otherPlayers.clone();
 		for(int i = 0; i < currentHand.getHandSize(); i++)
 			raisedCards.add(false);
 		repaint();	

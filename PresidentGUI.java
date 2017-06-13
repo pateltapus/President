@@ -73,6 +73,14 @@ public class PresidentGUI extends JFrame{
 		//DEBUG
 		
 		//jpanel.animate();
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+    	@Override
+    	public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+    		//add SQL stuff here
+            System.exit(0);
+        
+    }
+});
 
 		
 	}
@@ -107,7 +115,7 @@ public class PresidentGUI extends JFrame{
 		jpanelGame = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
 		this.add(jpanelGame);
 		this.setVisible(true);
-		jpanelGame.renderAHand(currPlayer.getHand());
+		jpanelGame.renderAHand(currPlayer.getHand(), otherPlayers);
 	}
 
 }
