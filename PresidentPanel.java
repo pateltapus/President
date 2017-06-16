@@ -35,22 +35,22 @@ public class PresidentPanel extends JPanel{
 	private static final int HEIGHT = 190;
 
 	//p1
-	private static final int INITY = 490;
+	private static final int INITY = 525;
 	private static final int DELTAY = -20;
 
 	//p2
-	private static final int INITX2;
+	private static final int INITX2 = 30;
 
 	//p3
-	private static final int INITY3 = 100;
+	private static final int INITY3 = 25;//50-75
 
 	//p4
-	private static final int INITX4;
+	private static final int INITX4 = 770;
 
-	private static final int PASSBUTTONX = 710;
-	private static final int PASSBUTTONY = 489+50;
-	private static final int PLAYBUTTONX = 710;
-	private static final int PLAYBUTTONY = 489+0;
+	private static final int PASSBUTTONX = 740;
+	private static final int PASSBUTTONY = 525+50;
+	private static final int PLAYBUTTONX = 740;
+	private static final int PLAYBUTTONY = 525+0;
 	private static final int BUTTONWIDTH = 607*4/20;
 	private static final int BUTTONHEIGHT = 235*4/20;
 	private static final int PILEX = 415;
@@ -163,29 +163,29 @@ public class PresidentPanel extends JPanel{
 		//print other hands
 
 			//left
-/*			for(int i = 0; i < otherHands[0]; i++){
-				int j = 40; //change later for scaling
-				int k = 380 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
-					g.drawImage(cardBackImages[0][0], i*j+k, INITX2, WIDTH/2, HEIGHT/2, null); //140 190 
-			}*/
+			BufferedImage temp = rotate90ToRight(cardBackImages[0][0]);
+			for(int i = 0; i < otherHands[0]; i++){
+				int j = 20; //change later for scaling
+				int k = 400 - otherHands[0]*20; 
+					g.drawImage(temp, INITX2, i*j+k, HEIGHT/2, WIDTH/2, null); 
+			}
 
 			//top
 			for(int i = 0; i < otherHands[1]; i++){
-				int j = 40; //change later for scaling
-				int k = 380 - otherHands[1]*20; //change later for scaling, 120 for 13 cards
-					g.drawImage(cardBackImages[0][0], i*j+k, INITY3, WIDTH/2, HEIGHT/2, null); //140 190 
+				int j = 20; //change later for scaling
+				int k = 545 - otherHands[1]*20; 
+					g.drawImage(rotate180(cardBackImages[0][0]), i*j+k, INITY3, WIDTH/2, HEIGHT/2, null);
 			}
-/*
+
 			//right
 			for(int i = 0; i < otherHands[2]; i++){
-				int j = 40; //change later for scaling
-				int k = 380 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
-					g.drawImage(cardBackImages[0][0], i*j+k, INITX4, WIDTH/2, HEIGHT/2, null); //140 190 
-			}*/
+				int j = 20; //change later for scaling
+				int k = 400 - otherHands[2]*20; 
+					g.drawImage(rotate90ToLeft(cardBackImages[0][0]), INITX4, i*j+k, HEIGHT/2, WIDTH/2, null); 
+			}
 
 
 		//print our hand
-		
 		if(currentHand != null){
 			if(!playedCards.isEmpty()){
 				if(playedCards.get(0).getValue() !=2 && !(playedCards.size()==4)){
@@ -195,7 +195,7 @@ public class PresidentPanel extends JPanel{
 							g.drawImage(cardImages[3-playedCards.get(i).getSuit()][playedCards.get(i).getValue()-2], PILEX + k*i - playedCards.size()*8 , PILEY, WIDTH/2, HEIGHT/2, null);
 					}
 				}
-			}
+			}	
 			if (logicChecker.checkPlayButton(cardQueue))
 				g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
 			else
@@ -210,7 +210,7 @@ public class PresidentPanel extends JPanel{
 				xMin.clear();
 				for(int i = 0; i < currentHand.getHandSize(); i++){
 					int j = 40; //change later for scaling
-					int k = 380 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
+					int k = 410 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
 					if(raisedCards.get(i))
 						g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY+DELTAY, WIDTH/2, HEIGHT/2, null); //140 190 
 					else
@@ -359,7 +359,7 @@ public class PresidentPanel extends JPanel{
 		//J of spades
 		cardImages[0][9] = cardsSS.getSubimage(0, 2*HEIGHT, WIDTH, HEIGHT);
 		//Q of spades
-		cardImages[0][10] = cardsSS.getSubimage(0, 0, WIDTH, HEIGHT);
+		cardImages[0][10] = cardsSS.getSubimage(0, 0, WIDTH, HEIGHT); 
 		//K of spades
 		cardImages[0][11] = cardsSS.getSubimage(0, 1*HEIGHT, WIDTH, HEIGHT);
 		//A of spades
@@ -410,6 +410,38 @@ public class PresidentPanel extends JPanel{
 		cardImages[3][12] = cardsSS.getSubimage(4*WIDTH, 3*HEIGHT, WIDTH, HEIGHT);
 	}
 
+	public BufferedImage rotate90ToRight(BufferedImage inputImage){
+		BufferedImage returnImage = new BufferedImage(HEIGHT, WIDTH, inputImage.getType());
+
+		for(int x = 0; x < WIDTH; x++) {
+			for( int y = 0; y < HEIGHT; y++ ) {
+				returnImage.setRGB(HEIGHT-y-1, x, inputImage.getRGB(x, y));
+			}
+		}
+		return returnImage;
+	}
+
+	public BufferedImage rotate90ToLeft(BufferedImage inputImage){
+		BufferedImage returnImage = new BufferedImage(HEIGHT, WIDTH, inputImage.getType());
+
+		for(int x = 0; x < WIDTH; x++) {
+			for( int y = 0; y < HEIGHT; y++ ) {
+				returnImage.setRGB(y, WIDTH-x-1, inputImage.getRGB(x, y));
+			}
+		}
+		return returnImage;
+	}
+
+	public BufferedImage rotate180(BufferedImage inputImage) {
+		BufferedImage returnImage = new BufferedImage(WIDTH, HEIGHT, inputImage.getType());
+
+		for(int x = 0; x < WIDTH; x++){
+			for(int y = 0; y < HEIGHT; y++){
+				returnImage.setRGB(WIDTH-x-1, HEIGHT-y-1, inputImage.getRGB(x, y));
+			}
+		}
+		return returnImage;
+	}
 
 
 	//DEBUG-----/

@@ -38,9 +38,7 @@ public class President{
 			currPlayer.getHand().addCard(new Card(sqlServer.getInitCards(orderNum, "Num", i), sqlServer.getInitCards(orderNum, "Suit", i)));
 		}
 
-
-
-
+		currPlayer.sortMyHand();
 
 		int otherPlayers[] = new int[3];
 

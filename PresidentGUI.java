@@ -113,9 +113,11 @@ public class PresidentGUI extends JFrame{
 	//DEBUG
 	public void renderHandOnScreen(Player currPlayer, int[] otherPlayers){
 		jpanelGame = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
+		int players[] = new int[3];
+		players = otherPlayers.clone();
 		this.add(jpanelGame);
 		this.setVisible(true);
-		jpanelGame.renderAHand(currPlayer.getHand(), otherPlayers);
+		jpanelGame.renderAHand(currPlayer.getHand(), players);
 	}
 
 }
