@@ -29,7 +29,7 @@ class Server
 
 	public void createPlayer(String name){
 		try{
-			String SQL = "INSERT INTO PresidentTable (Player, Card1Value, Card1Suit, Card2Value, Card2Suit, Card3Value, Card3Suit, Card4Value, Card4Suit, Turn, numCards, PlayerID) VALUES ('" + name + "', -1, -1, -1 ,-1, -1, -1, -1, -1, -1, 13," + (getRows()+1) + ")";
+			String SQL = "INSERT INTO PresidentTable (Player, Card1Value, Card1Suit, Card2Value, Card2Suit, Card3Value, Card3Suit, Card4Value, Card4Suit, Turn, numCards, PlayerID, Place) VALUES ('" + name + "', -1, -1, -1 ,-1, -1, -1, -1, -1, -1, 13," + (getRows()+1) + ",0)";
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(SQL);
 		}
@@ -41,7 +41,7 @@ class Server
 
     public void sendDataCell(String column, int data, int id){
     	try{
-	    	String SQL = "UPDATE PresidentTable SET" + column + "=" + data + "WHERE playerID = " + id;
+	    	String SQL = "UPDATE PresidentTable SET " + column + "=" + data + "WHERE playerID = " + id;
 	    	Statement stmt = con.createStatement();
 			stmt.executeUpdate(SQL);
 		}
@@ -59,6 +59,25 @@ class Server
 			ResultSet rs = stmt.executeQuery(SQL);
 			rs.next();
 			value = rs.getInt(1);
+			//System.out.println("Column: " + column + " id: " + id + " value: " + value);
+			rs.close();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			System.exit(0);
+		}
+		return value;
+    }
+
+    public String readStringCell(String column, int id){
+    	String value = "";
+    	try{
+	    	String SQL = "SELECT " + column + " FROM PresidentTable WHERE playerID = " + id;
+	    	Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(SQL);
+			rs.next();
+			value = rs.getString(1);
+			//System.out.println("Column: " + column + " id: " + id + " value: " + value);
 			rs.close();
 		}
 		catch(Exception e){
@@ -152,4 +171,18 @@ class Server
 
     }
 
+    public void sortTableById(){
+    	try{
+	    	String SQL = "SELECT * FROM PresidentTable ORDER BY playerID";
+	    	Statement stmt = con.createStatement();
+			stmt.executeQuery(SQL);
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			System.exit(0);
+		}
+    }
+
 }
+
+

@@ -1,4 +1,5 @@
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -16,15 +17,18 @@ public class PresidentPanel extends JPanel{
 	private BufferedImage[][] cardBackImages, cardImages;
 	private static String cardBackPath, cardsPath;
 	private ArrayList<Integer> xMax, xMin;
-	private ArrayList<Card> cardQueue;
-	private ArrayList<Card> playedCards;
+	private ArrayList<Card> cardQueue, playedCards, passedCards;
 	private PileLogic logicChecker;
 	private ArrayList<Boolean> raisedCards;
 	private int[] otherHands;
+	private JLabel p1Name, p2Name, p3Name, p4Name;
 
 
 	private Hand currentHand;
 	private boolean hasTurn = true;
+	private boolean noCards = false;
+	private boolean turnDone = false;
+	private boolean turn = false;
 	
 	private static final int cbROWS = 5;
 	private static final int cbCOLS = 3;
@@ -54,7 +58,7 @@ public class PresidentPanel extends JPanel{
 	private static final int BUTTONWIDTH = 607*4/20;
 	private static final int BUTTONHEIGHT = 235*4/20;
 	private static final int PILEX = 415;
-	private static final int PILEY = 235;//215
+	private static final int PILEY = 245;//215
 
 	//DEBUG------/
 	private int x,  y, z;
@@ -75,8 +79,9 @@ public class PresidentPanel extends JPanel{
 		this.xMin = new ArrayList<Integer>();
 		this.cardQueue = new ArrayList<Card>();
 		this.logicChecker = new PileLogic();
-		this.raisedCards = new ArrayList<Boolean>();
+		this.raisedCards = new ArrayList<Boolean>(); 
 		this.playedCards = new ArrayList<Card>();
+		this.passedCards = new ArrayList<Card>();
 
 		cardBackImages = new BufferedImage[cbROWS][cbCOLS]; //5 rows 3 columns,  ****ROWS PARSE DESIGN, COLS PARSE COLOR****
 		cardImages = new BufferedImage[cROWS][cCOLS] ;//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
@@ -196,16 +201,16 @@ public class PresidentPanel extends JPanel{
 					}
 				}
 			}	
-			if (logicChecker.checkPlayButton(cardQueue))
+			if (logicChecker.checkPlayButton(cardQueue) && turn)
 				g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
 			else
 				g.drawImage(playButtonGrey,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
 			
-			if (logicChecker.checkPassButton(cardQueue))
+			if (logicChecker.checkPassButton(cardQueue) && turn)
 				g.drawImage(passButton,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
 			else
 				g.drawImage(passButtonGrey,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
-			System.out.println("FLAG");
+
 			if(currentHand.getHandSize() != 0){
 				xMin.clear();
 				for(int i = 0; i < currentHand.getHandSize(); i++){
@@ -222,7 +227,15 @@ public class PresidentPanel extends JPanel{
 		}
 	}
 
-	public void renderAHand(Hand handPrint, int[] otherPlayers){
+	public void renderAHand(Hand handPrint, int[] otherPlayers, ArrayList<Card> newCards, boolean turn){
+		//clear values for new turn
+
+		//render last passed cards; set playedCards to last passed cards
+		this.turn = turn;
+		turnDone = false;
+		playedCards.clear();
+		playedCards.addAll(newCards);
+		passedCards.clear();
 		currentHand = handPrint;
 		otherHands = otherPlayers.clone();
 		for(int i = 0; i < currentHand.getHandSize(); i++)
@@ -239,108 +252,120 @@ public class PresidentPanel extends JPanel{
 	}
 
 	private void cardClicker(MouseEvent me){
-		for(int i = 0; i< xMin.size()-1; i++){					
-			//bound each card			
-			if(raisedCards.get(i)){ //card is raised
-				if(me.getY()>(INITY+DELTAY) && me.getY()<(INITY+HEIGHT/2+DELTAY)){ //50 pixels raise atm
-					if(raisedCards.get(i+1)){ //if next card is raised
+		if(turn){
+			for(int i = 0; i< xMin.size()-1; i++){					
+				//bound each card			
+				if(raisedCards.get(i)){ //card is raised
+					if(me.getY()>(INITY+DELTAY) && me.getY()<(INITY+HEIGHT/2+DELTAY)){ //50 pixels raise atm
+						if(raisedCards.get(i+1)){ //if next card is raised
+							if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
+								System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
+									cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
+									raisedCards.set(i, false);
+								break;
+							}
+						}
+						else{ //if next card isnt raised
+							if((me.getX()>xMin.get(i) && me.getX()<xMax.get(i))||(me.getX()>xMin.get(i) && me.getX()<(xMin.get(i)+WIDTH/2) && me.getY()<INITY)){
+								System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
+									cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
+									raisedCards.set(i, false);
+								break;
+							}
+						}
+					}
+				}
+
+				else{ //card is not raised
+					if(me.getY()>INITY && me.getY()<(INITY+HEIGHT/2)){
 						if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
 							System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
-								cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
-								raisedCards.set(i, false);
+							if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(i))){
+								cardQueue.add(currentHand.getCardFromLoc(i));
+								raisedCards.set(i, true);
+							}
+							else{ //replacement for convenience of user
+								cardQueue.clear();
+								cardQueue.add(currentHand.getCardFromLoc(i));
+								for(int j = 0; j < raisedCards.size(); j++)
+									raisedCards.set(j, false);
+								raisedCards.set(i, true);
+							}
 							break;
-						}
+						}									
 					}
-					else{ //if next card isnt raised
-						if((me.getX()>xMin.get(i) && me.getX()<xMax.get(i))||(me.getX()>xMin.get(i) && me.getX()<(xMin.get(i)+WIDTH/2) && me.getY()<INITY)){
-							System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
-								cardQueue.remove(currentHand.getCardFromLoc(i)); //remove card from queue
-								raisedCards.set(i, false);
-							break;
-						}
-					}
-				}
-			}
 
-			else{ //card is not raised
-				if(me.getY()>INITY && me.getY()<(INITY+HEIGHT/2)){
-					if(me.getX()>xMin.get(i) && me.getX()<xMax.get(i)){
-						System.out.println(currentHand.getCardFromLoc(i).getValue() + " " + currentHand.getCardFromLoc(i).getSuit());
-						if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(i))){
-							cardQueue.add(currentHand.getCardFromLoc(i));
-							raisedCards.set(i, true);
+				}	
+			}
+		
+
+			//hard code last card
+			if(me.getX()>xMin.get(xMin.size()-1) && me.getX()<xMax.get(xMax.size()-1)){
+				if(raisedCards.get(xMin.size()-1)){ //card is raised
+					if(me.getY()>(INITY+DELTAY) && me.getY()<(INITY+HEIGHT/2+DELTAY)){
+						System.out.println(currentHand.getCardFromLoc(xMin.size()-1).getValue() + " " + currentHand.getCardFromLoc(xMin.size()-1).getSuit());
+						if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
+							cardQueue.remove(currentHand.getCardFromLoc(xMin.size()-1));
+							raisedCards.set(xMin.size()-1, false);
 						}
-						else{ //replacement for convenience of user
+					}
+
+				}
+				else{
+					if(me.getY()>INITY && me.getY()<(INITY+HEIGHT/2)){
+						System.out.println(currentHand.getCardFromLoc(xMin.size()-1).getValue() + " " + currentHand.getCardFromLoc(xMin.size()-1).getSuit());
+						if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
+							cardQueue.add(currentHand.getCardFromLoc(xMin.size()-1));
+							raisedCards.set(xMin.size()-1, true);
+						}
+						else{
 							cardQueue.clear();
-							cardQueue.add(currentHand.getCardFromLoc(i));
+							cardQueue.add(currentHand.getCardFromLoc(xMin.size()-1));
 							for(int j = 0; j < raisedCards.size(); j++)
 								raisedCards.set(j, false);
-							raisedCards.set(i, true);
+							raisedCards.set(xMin.size()-1, true);
 						}
-						break;
-					}									
-				}
-
-			}	
-		}
-
-		//hard code last card
-		if(me.getX()>xMin.get(xMin.size()-1) && me.getX()<xMax.get(xMax.size()-1)){
-			if(raisedCards.get(xMin.size()-1)){ //card is raised
-				if(me.getY()>(INITY+DELTAY) && me.getY()<(INITY+HEIGHT/2+DELTAY)){
-					System.out.println(currentHand.getCardFromLoc(xMin.size()-1).getValue() + " " + currentHand.getCardFromLoc(xMin.size()-1).getSuit());
-					if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
-						cardQueue.remove(currentHand.getCardFromLoc(xMin.size()-1));
-						raisedCards.set(xMin.size()-1, false);
 					}
 				}
 
 			}
-			else{
-				if(me.getY()>INITY && me.getY()<(INITY+HEIGHT/2)){
-					System.out.println(currentHand.getCardFromLoc(xMin.size()-1).getValue() + " " + currentHand.getCardFromLoc(xMin.size()-1).getSuit());
-					if(logicChecker.checkClick(cardQueue, currentHand.getCardFromLoc(xMin.size()-1))){
-						cardQueue.add(currentHand.getCardFromLoc(xMin.size()-1));
-						raisedCards.set(xMin.size()-1, true);
-					}
-					else{
-						cardQueue.clear();
-						cardQueue.add(currentHand.getCardFromLoc(xMin.size()-1));
-						for(int j = 0; j < raisedCards.size(); j++)
-							raisedCards.set(j, false);
-						raisedCards.set(xMin.size()-1, true);
-					}
-				}
-			}
-
 		}
 	}
 
 	//TODO: Implement button clicking
 	private void buttonClicker(MouseEvent me){
-		if(me.getX()>PLAYBUTTONX && me.getX()<PLAYBUTTONX+BUTTONWIDTH && me.getY()>PLAYBUTTONY && me.getY()<PLAYBUTTONY+BUTTONHEIGHT && logicChecker.checkPlayButton(cardQueue)){
-			if(logicChecker.checkPlay(cardQueue)){
-				playedCards.clear();
-				for(int i = 0; i < cardQueue.size(); i++){
-					playedCards.add(cardQueue.get(i));
-					raisedCards.remove(currentHand.getCardIndex(cardQueue.get(i)));
-					currentHand.removeCard(cardQueue.get(i));
+		if(turn){
+			if(me.getX()>PLAYBUTTONX && me.getX()<PLAYBUTTONX+BUTTONWIDTH && me.getY()>PLAYBUTTONY && me.getY()<PLAYBUTTONY+BUTTONHEIGHT && logicChecker.checkPlayButton(cardQueue)){
+				if(logicChecker.checkPlay(cardQueue)){
+					playedCards.clear();
+					for(int i = 0; i < cardQueue.size(); i++){
+						playedCards.add(cardQueue.get(i));
+						raisedCards.remove(currentHand.getCardIndex(cardQueue.get(i)));
+						currentHand.removeCard(cardQueue.get(i));
 
-				}
-				currentHand.sortHand();
-				cardQueue.clear();
-				if(currentHand.getHandSize() == 0){
-					//this player wins
-				}
+					}
+					currentHand.sortHand();
+					passedCards.addAll(cardQueue);
+					cardQueue.clear();
+					if(currentHand.getHandSize() == 0){
+						noCards = true;
+					}
 
-				//TODO:
-				//change turn
+					turnDone = true;
+
+					//TODO:
+					//change turn
+				}
 			}
-		}
-		else if(me.getX()>PASSBUTTONX && me.getX()<PASSBUTTONX+BUTTONWIDTH  && me.getY()>PASSBUTTONY   && me.getY()<PASSBUTTONY+BUTTONHEIGHT  && logicChecker.checkPassButton(cardQueue)){
-			if(logicChecker.checkPass(cardQueue)){
-				//TODO:
-				//change turn
+			else if(me.getX()>PASSBUTTONX && me.getX()<PASSBUTTONX+BUTTONWIDTH  && me.getY()>PASSBUTTONY   && me.getY()<PASSBUTTONY+BUTTONHEIGHT  && logicChecker.checkPassButton(cardQueue)){
+				if(logicChecker.checkPass(cardQueue)){
+					//TODO:
+					//change turn
+					passedCards.clear();
+					turnDone = true;
+				}
+
+				turnDone = true;
 			}
 		}
 	}
@@ -461,5 +486,17 @@ public class PresidentPanel extends JPanel{
 		}
 	}
 	//---------/
+
+	public boolean getNoCards(){
+		return noCards;
+	}
+
+	public ArrayList<Card> getPassedCards(){
+		return passedCards;
+	}
+
+	public boolean getTurnDone(){
+		return turnDone;
+	}
 
 }
