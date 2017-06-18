@@ -7,8 +7,8 @@ public class President{
 	private static Player playerList[];
 
 	public static void main(String args[]){
-		
-		
+
+
 		PresidentGUI newGame = new PresidentGUI();
 		//Get names into an ArrayList
 		ArrayList<String> names = new ArrayList<String>();
@@ -61,17 +61,17 @@ public class President{
 
 
 
-		
-		
-		
-		
-/*		
-		PSEUDOCODE FOR SQL COMMUNICATION AND GAMESTATE: 
+
+
+
+
+/*
+		PSEUDOCODE FOR SQL COMMUNICATION AND GAMESTATE:
 
 		Server sqlServer = new Server();
 		send newGame.getName() to sql
 
-		
+
 		if(the four people aren't in sql server){
 			newGame.createWaitScreen();
 			while(keep checking server for four people){

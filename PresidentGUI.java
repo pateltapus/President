@@ -60,8 +60,13 @@ public class PresidentGUI extends JFrame{
 
 		//create namescreen
 		jpanelName = new Namescreen();
+		jpanelName.setLayout(null);
+
 		jpanelName.addTextField();
+
 		this.add(jpanelName);
+		//this.pack();
+
 		this.setVisible(true);
 
 		while(name.equals("")){
@@ -71,18 +76,18 @@ public class PresidentGUI extends JFrame{
 		this.remove(jpanelName);
 
 		//DEBUG
-		
+
 		//jpanel.animate();
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
     	@Override
     	public void windowClosing(java.awt.event.WindowEvent windowEvent) {
     		//add SQL stuff here
             System.exit(0);
-        
+
     }
 });
 
-		
+
 	}
 
 	public String getName(){
@@ -92,7 +97,7 @@ public class PresidentGUI extends JFrame{
 	public void setPlayersFound(){
 		this.playersFound = true;
 	}
-	
+
 	public void createWaitScreen(){
 		//create waitscreen
 
@@ -116,6 +121,7 @@ public class PresidentGUI extends JFrame{
 		int players[] = new int[3];
 		players = otherPlayers.clone();
 		this.add(jpanelGame);
+		this.pack();
 		this.setVisible(true);
 		jpanelGame.renderAHand(currPlayer.getHand(), players);
 	}

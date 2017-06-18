@@ -19,7 +19,7 @@ public class Namescreen extends JPanel {
 
 	public Namescreen(){
 
-		
+
 
 		try{
 			namescreenImg = ImageIO.read(new File("Images/Frames/EnterNameScreen.png"));
@@ -35,17 +35,26 @@ public class Namescreen extends JPanel {
 					if(!(textField.getText().equals(""))){
 						name = textField.getText();
 					}
-					
+
 			}
 		});
 	}
 
 	public void addTextField(){
 		//this.textField.setVisible(false);
-		this.textField = new JTextField(30);
+		/*this.textField = new JTextField(30);
 		this.textField.setBounds(273,476,328,36);
-		
+
 		this.add(this.textField);
+		*/
+		JTextField textInput = new JTextField(30);
+		Font font = new Font("SansSerif", Font.BOLD, 18);
+		textInput.setBorder(null);
+		textInput.setBounds(279,470,315,25);
+		textInput.setFont(font);
+		//textInput.setHorizontalAlgnment();
+		this.add(textInput);
+		//repaint();
 	}
 
 	public String getName(){
