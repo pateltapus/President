@@ -8,6 +8,9 @@ import java.awt.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 
 
 public class Namescreen extends JPanel {
@@ -29,6 +32,7 @@ public class Namescreen extends JPanel {
 		}
 
 		addMouseListener(new MouseAdapter(){
+			@Override
 			public void mousePressed(MouseEvent me){
 				//if hits join lobby then execute
 				if(me.getX() >= 602 && me.getX() <= 639 && me.getY() >= 466 && me.getY() <= 502) //&& if name is entered
@@ -38,14 +42,31 @@ public class Namescreen extends JPanel {
 					
 			}
 		});
+
+		addTextField();
+
+		textField.addKeyListener(new KeyAdapter(){
+			@Override
+			public void keyPressed(KeyEvent ke){
+				if(ke.getKeyCode() == KeyEvent.VK_ENTER){
+					if(!(textField.getText().equals(""))){
+						name = textField.getText();
+					}
+				}
+
+			}
+		});
 	}
 
-	public void addTextField(){
-		//this.textField.setVisible(false);
-		this.textField = new JTextField(30);
-		this.textField.setBounds(273,476,328,36);
+	public void addTextField(){	
+		textField = new JTextField(30);
+		Font font = new Font("SansSerif", Font.BOLD, 18);
+		textField.setBorder(null);
+		textField.setBounds(279,472,315,25);
+		textField.setFont(font);
 		
-		this.add(this.textField);
+		this.add(textField);
+	
 	}
 
 	public String getName(){

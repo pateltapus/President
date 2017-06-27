@@ -29,7 +29,7 @@ class Server
 
 	public void createPlayer(String name){
 		try{
-			String SQL = "INSERT INTO PresidentTable (Player, Card1Value, Card1Suit, Card2Value, Card2Suit, Card3Value, Card3Suit, Card4Value, Card4Suit, Turn, numCards, PlayerID, Place) VALUES ('" + name + "', -1, -1, -1 ,-1, -1, -1, -1, -1, -1, 13," + (getRows()+1) + ",0)";
+			String SQL = "INSERT INTO PresidentTable (Player, Card1Value, Card1Suit, Card2Value, Card2Suit, Card3Value, Card3Suit, Card4Value, Card4Suit, Turn, numCards, PlayerID, Place, ingame) VALUES ('" + name + "', -1, -1, -1 ,-1, -1, -1, -1, -1, -1, 13," + (getRows()+1) + ", 0, 1)";
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(SQL);
 		}

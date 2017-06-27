@@ -12,7 +12,9 @@ public class PileLogic{
 		this.pileCount = 0;
 	}
 	
-	public boolean checkClick (ArrayList<Card> queuedCards, Card chosenCard){
+	public boolean checkClick (ArrayList<Card> inputCards, Card chosenCard){
+		ArrayList<Card> queuedCards = new ArrayList<Card>();
+		queuedCards.addAll(inputCards);
 
 		if(queuedCards.size()==1 && queuedCards.get(0).getValue()==2 && chosenCard.getValue()==2 && chosenCard.getSuit()!=queuedCards.get(0).getSuit()) //account for 2's
 			return false;
@@ -25,12 +27,16 @@ public class PileLogic{
 	}
 	
 	public void checkRefresh(){ //called at the start of a turn
-		if(this.passPlayCounter == 3)
+		if(this.passPlayCounter == 3){
 			this.pileValue = 0;
 			this.pileCount = 1;
+		}
 	}
 	
-	public boolean checkWin(ArrayList<Card> hand){
+	public boolean checkWin(ArrayList<Card> inputHand){
+		ArrayList<Card> hand = new ArrayList<Card>();
+		hand.addAll(inputHand);
+
 		if(hand.size()<5){
 			for(int i = 0; i < hand.size(); i++){
 				if(hand.get(i).getValue()!=2)
@@ -43,7 +49,10 @@ public class PileLogic{
 		return false;
 	}
 	
-	public boolean checkPlay (ArrayList<Card> queuedCards){
+	public boolean checkPlay (ArrayList<Card> inputCards){
+		ArrayList<Card> queuedCards = new ArrayList<Card>();
+		queuedCards.addAll(inputCards);
+
 		if(((queuedCards.size() == 1 && queuedCards.get(0).getValue()==2) || queuedCards.size()==4)){
 			this.pileValue = 0;
 			this.passPlayCounter = 0;
@@ -81,7 +90,10 @@ public class PileLogic{
 		}
 	}
 	
-	public boolean checkPass(ArrayList<Card> queuedCards){
+	public boolean checkPass(ArrayList<Card> inputCards){
+		ArrayList<Card> queuedCards = new ArrayList<Card>();
+		queuedCards.addAll(inputCards);
+
 		if (queuedCards.size() == 0){
 			this.passPlayCounter++;
 			return true;
@@ -91,7 +103,10 @@ public class PileLogic{
 		}
 	}
 	
-	public boolean checkPlayButton (ArrayList<Card> queuedCards){
+	public boolean checkPlayButton (ArrayList<Card> inputCards){
+		ArrayList<Card> queuedCards = new ArrayList<Card>();
+		queuedCards.addAll(inputCards);
+
 		if(((queuedCards.size() == 1 && queuedCards.get(0).getValue()==2) || queuedCards.size()==4))
 			return true;
 			
@@ -120,10 +135,27 @@ public class PileLogic{
 			return false;
 	}
 	
-	public boolean checkPassButton(ArrayList<Card> queuedCards){
+	public boolean checkPassButton(ArrayList<Card> inputCards){
+		ArrayList<Card> queuedCards = new ArrayList<Card>();
+		queuedCards.addAll(inputCards);
+
 		if (queuedCards.size() == 0)
 			return true;
 		else 
 			return false;
+	}
+
+	public void setPileValue(ArrayList<Card> inputCards){
+		ArrayList<Card> oldCards = new ArrayList<Card>();
+		this.pileCount = oldCards.size();
+		
+		if(oldCards.isEmpty())
+			this.pileValue = oldCards.get(0).getValue();
+		else
+			this.pileValue = 1;
+	}
+
+	public void resetPileCount(){
+			this.passPlayCounter = 0;
 	}
 }

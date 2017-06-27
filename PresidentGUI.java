@@ -32,6 +32,8 @@ public class PresidentGUI extends JFrame{
 	private PresidentPanel jpanelGame;
 	private String name = "";
 	private boolean playersFound = false;
+	private Server server;
+	private int orderNum = 0;
 
 	public PresidentGUI(){
 
@@ -51,6 +53,7 @@ public class PresidentGUI extends JFrame{
 		this.setVisible(true);
 
 		boolean lobbyJoined = false;
+		server = new Server();
 
 		while(lobbyJoined == false){
 			lobbyJoined = jpanelLoad.getLobbyJoined();
@@ -60,7 +63,8 @@ public class PresidentGUI extends JFrame{
 
 		//create namescreen
 		jpanelName = new Namescreen();
-		jpanelName.addTextField();
+		jpanelName.setLayout(null);
+		//jpanelName.addTextField();
 		this.add(jpanelName);
 		this.setVisible(true);
 
@@ -74,13 +78,28 @@ public class PresidentGUI extends JFrame{
 		
 		//jpanel.animate();
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
-    	@Override
-    	public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-    		//add SQL stuff here
-            System.exit(0);
-        
-    }
-});
+	    	@Override
+	    	public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+	    		//add SQL stuff here
+	    		int count = 0;
+
+	    		System.out.println(orderNum); //debug
+
+	    		server.sendDataCell("ingame", 0, orderNum);
+
+	    		System.out.println(server.readDataCell("ingame", orderNum)); //debug
+
+	    		for(int i = 1; i < server.getRows()+1; i++){
+	    			if(server.readDataCell("ingame", i) == 0)
+	    				count++;
+	    		}
+
+	    		if(count == server.getRows())
+	    			server.clearPresTable();
+
+	            System.exit(0);
+			}
+		});
 
 		
 	}
@@ -110,15 +129,25 @@ public class PresidentGUI extends JFrame{
 		this.remove(jpanelWait);
 	}
 
-	//DEBUG
-	public void renderHandOnScreen(Player currPlayer, int[] otherPlayers, ArrayList<Card> playedCards, boolean turn){
+	public void createGameScreen(){
 		jpanelGame = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
+	}
+
+	//DEBUG
+	public void renderHandOnScreen(Player currPlayer, int[] otherPlayers, ArrayList<Card> playedCards){
+
 		int players[] = new int[3];
-		boolean currTurn = turn;
 		players = otherPlayers.clone();
+
+		//System.out.println(playedCards.size());
+		ArrayList<Card> temp = new ArrayList<Card>();
+		temp.clear();
+		temp.addAll(playedCards);
+		
 		this.add(jpanelGame);
 		this.setVisible(true);
-		jpanelGame.renderAHand(currPlayer.getHand(), players, playedCards, currTurn);
+
+		jpanelGame.renderAHand(currPlayer.getHand(), players, temp);
 	}
 
 	public boolean checkDone(){
@@ -131,6 +160,14 @@ public class PresidentGUI extends JFrame{
 
 	public boolean getTurnOver(){
 		return jpanelGame.getTurnDone();
+	}
+
+	public void setOrderNum(int orderNum){
+		int temp;
+		temp = orderNum;
+		this.orderNum =orderNum;
+		System.out.println(temp);
+		jpanelGame.setOrderNumPanel(temp);
 	}
 
 }
