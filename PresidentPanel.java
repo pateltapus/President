@@ -83,6 +83,7 @@ public class PresidentPanel extends JPanel{
 		this.raisedCards = new ArrayList<Boolean>(); 
 		this.playedCards = new ArrayList<Card>();
 		this.passedCards = new ArrayList<Card>();
+		this.otherHands = new int[3];
 
 		cardBackImages = new BufferedImage[cbROWS][cbCOLS]; //5 rows 3 columns,  ****ROWS PARSE DESIGN, COLS PARSE COLOR****
 		cardImages = new BufferedImage[cROWS][cCOLS] ;//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
@@ -167,29 +168,28 @@ public class PresidentPanel extends JPanel{
 		//TODO: Find and implement a nice felt background
 		g.drawImage(background, 0, 0, null);
 
-		//print other hands
+		//print other hands		
 
-			//left
-			BufferedImage temp = rotate90ToRight(cardBackImages[0][0]);
-			for(int i = otherHands[0]-1; i > -1; i--){
-				int j = 20; //change later for scaling
-				int k = 400 - otherHands[0]*20; 
-					g.drawImage(temp, INITX2, i*j+k, HEIGHT/2, WIDTH/2, null); 
-			}
+		//left
+		for(int i = otherHands[0]-1; i > -1; i--){
+			int j = 20; //change later for scaling
+			int k = 400 - otherHands[0]*20; 
+				g.drawImage(rotate90ToRight(cardBackImages[0][0]), INITX2, i*j+k, HEIGHT/2, WIDTH/2, null); 
+		}
 
-			//top
-			for(int i = 0; i < otherHands[1]; i++){
-				int j = 20; //change later for scaling
-				int k = 545 - otherHands[1]*20; 
-					g.drawImage(rotate180(cardBackImages[0][0]), i*j+k, INITY3, WIDTH/2, HEIGHT/2, null);
-			}
+		//top
+		for(int i = 0; i < otherHands[1]; i++){
+			int j = 20; //change later for scaling
+			int k = 545 - otherHands[1]*20; 
+				g.drawImage(rotate180(cardBackImages[0][0]), i*j+k, INITY3, WIDTH/2, HEIGHT/2, null);
+		}
 
-			//right
-			for(int i = 0; i < otherHands[2]; i++){
-				int j = 20; //change later for scaling
-				int k = 400 - otherHands[2]*20; 
-					g.drawImage(rotate90ToLeft(cardBackImages[0][0]), INITX4, i*j+k, HEIGHT/2, WIDTH/2, null); 
-			}
+		//right
+		for(int i = 0; i < otherHands[2]; i++){
+			int j = 20; //change later for scaling
+			int k = 400 - otherHands[2]*20; 
+				g.drawImage(rotate90ToLeft(cardBackImages[0][0]), INITX4, i*j+k, HEIGHT/2, WIDTH/2, null); 
+		}
 
 
 		//print our hand
@@ -237,6 +237,8 @@ public class PresidentPanel extends JPanel{
 		playedCards.clear();
 		playedCards.addAll(newCards);
 
+		System.out.println("playedCards empty: " + playedCards.isEmpty());//debug
+
 		//set pilevalue
 		logicChecker.setPileValue(playedCards);
 
@@ -250,7 +252,7 @@ public class PresidentPanel extends JPanel{
 		}
 
 		if(reset)
-			server.resetPileCount();
+			logicChecker.resetPileCount();
 
 
 		//DEBUG
@@ -262,6 +264,7 @@ public class PresidentPanel extends JPanel{
 		passedCards.clear();
 		currentHand = handPrint;
 		otherHands = otherPlayers.clone();
+		System.out.println(otherHands.length); //debug
 		for(int i = 0; i < currentHand.getHandSize(); i++)
 			raisedCards.add(false);
 		repaint();	

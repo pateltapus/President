@@ -16,6 +16,9 @@ public class PileLogic{
 		ArrayList<Card> queuedCards = new ArrayList<Card>();
 		queuedCards.addAll(inputCards);
 
+		System.out.println("pileValue: " + pileValue);
+		System.out.println("pileCount: " + pileCount);	
+
 		if(queuedCards.size()==1 && queuedCards.get(0).getValue()==2 && chosenCard.getValue()==2 && chosenCard.getSuit()!=queuedCards.get(0).getSuit()) //account for 2's
 			return false;
 			
@@ -54,9 +57,9 @@ public class PileLogic{
 		queuedCards.addAll(inputCards);
 
 		if(((queuedCards.size() == 1 && queuedCards.get(0).getValue()==2) || queuedCards.size()==4)){
-			this.pileValue = 0;
+/*			this.pileValue = 0;
 			this.passPlayCounter = 0;
-			this.pileCount = 1;
+			this.pileCount = 1;*/
 			return true;
 		}
 			
@@ -80,9 +83,9 @@ public class PileLogic{
 		if(!queuedCards.isEmpty())
 			powerValue = queuedCards.get(0).getValue();
 		if((powerValue > pileValue && queuedCards.size()==pileCount)||(queuedCards.size()>pileCount)){ //currently doesnt handle equal since the prev will
-			this.pileValue = powerValue;
+/*			this.pileValue = powerValue;
 			this.passPlayCounter = 0;
-			this.pileCount = queuedCards.size();
+			this.pileCount = queuedCards.size();*/
 			return true;
 		}
 		else{
@@ -95,7 +98,7 @@ public class PileLogic{
 		queuedCards.addAll(inputCards);
 
 		if (queuedCards.size() == 0){
-			this.passPlayCounter++;
+			/*this.passPlayCounter++;*/
 			return true;
 		}
 		else {
@@ -147,12 +150,14 @@ public class PileLogic{
 
 	public void setPileValue(ArrayList<Card> inputCards){
 		ArrayList<Card> oldCards = new ArrayList<Card>();
+		oldCards.addAll(inputCards);
+
 		this.pileCount = oldCards.size();
 		
 		if(oldCards.isEmpty())
-			this.pileValue = oldCards.get(0).getValue();
+			this.pileValue = 1;	
 		else
-			this.pileValue = 1;
+			this.pileValue = oldCards.get(0).getValue();
 	}
 
 	public void resetPileCount(){
