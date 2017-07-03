@@ -234,6 +234,10 @@ public class PresidentPanel extends JPanel{
 
 		//render last passed cards; set playedCards to last passed cards
 		turnDone = false;
+
+		logicChecker.resetSkip();
+		logicChecker.resetRepeat();
+
 		playedCards.clear();
 		playedCards.addAll(newCards);
 
@@ -526,8 +530,17 @@ public class PresidentPanel extends JPanel{
 		return turnDone;
 	}
 
+	public boolean getPanelSkip(){
+		return logicChecker.getSkip();
+	}
+
+	public boolean getPanelRepeat(){
+		return logicChecker.getRepeat();
+	}
+
 	public void setOrderNumPanel(int val){
 		this.orderNum = val;
 	}
+
 
 }

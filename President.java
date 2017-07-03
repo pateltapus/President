@@ -12,11 +12,11 @@ public class President{
 		//Get names into an ArrayList
 		ArrayList<String> names = new ArrayList<String>();
 /*		names.add("Joe");
-		names.add("Sam");
-		names.add("Linda");
 		names.add("Bill");*/
 		Server sqlServer = new Server();
 
+		names.add("Sam");
+		names.add("Linda");
 		sqlServer.createPlayer(newGame.getName());
 		int orderNum = sqlServer.getRows();
 
@@ -104,529 +104,122 @@ public class President{
 
 		//gameLoop
 		boolean gameRunning = true;
+		
+		while(gameRunning){
 
- 		while(gameRunning){
- 			
- 			//wait for turn
+			for(int j = 1; j < 5; j++){
+		 	
+		 			if((sqlServer.readDataCell("Place", j) == 0) && (sqlServer.readDataCell("Turn", j) == 1)){
+					 	//check for last played cards, needed for if a person is already done
+						int val, suit;
+						boolean flag = false;
+						prevCards.clear();
 
-/* PLAYER 1 TURN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+			 			while(sqlServer.readDataCell("Turn", j) == 1){
+			 				if(orderNum == j){
 
- 	
- 			if(sqlServer.readDataCell("Place", 1) == 0){
-			 	//check for last played cards, needed for if a person is already done
-				int val, suit;
-				prevCards.clear();
+			 					//now execute the turn
+			 					while(newGame.getTurnOver() == false);
 
-	 			while(sqlServer.readDataCell("Turn", 1) == 1){
-	 				if(orderNum == 1){
+			 					System.out.println("TURNOVER FLAG");
 
-	 					//now execute the turn
-	 					while(newGame.getTurnOver() == false);
+			 					if(newGame.checkDone() == true){
+							 		int count = 1;
+							 		for(int i = 1; i < 5; i++){
+							 			if(sqlServer.readDataCell("Place", i) != 0)
+							 				count++;
+							 		}
+							 		sqlServer.sendDataCell("Place", count, orderNum);
 
-	 					System.out.println("TURNOVER FLAG");
+							 	}
 
-	 					if(newGame.checkDone() == true){
-					 		int count = 1;
-					 		for(int i = 1; i < 5; i++){
-					 			if(sqlServer.readDataCell("Place", i) != 0)
-					 				count++;
-					 		}
-					 		sqlServer.sendDataCell("Place", count, orderNum);
+							 	for(int i = 0; i < newGame.getPileCards().size(); i++){
+							 		if(newGame.getPileCards().get(i).getValue() == 2){
+							 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, j);
+							 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, j);					 			
+							 		}
+							 		else{
+							 			sqlServer.sendDataCell("Card" + (i+1) + "Value", newGame.getPileCards().get(i).getValue(), j);
+							 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", newGame.getPileCards().get(i).getSuit(), j);
+							 		}
+						 		}
 
-					 	}
+						 		for(int i = newGame.getPileCards().size(); i < 4; i++){
+						 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, j);
+						 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, j);
+						 		}
 
-					 	for(int i = 0; i < newGame.getPileCards().size(); i++){
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Value", newGame.getPileCards().get(i).getValue(), 1);
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", newGame.getPileCards().get(i).getSuit(), 1);
-				 		}
+						 		//change turn
+						 		sqlServer.sendDataCell("Turn", -1, orderNum);
 
-				 		for(int i = newGame.getPileCards().size(); i < 4; i++){
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, 1);
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, 1);
-				 		}
+						 		int k = j + 1;
+						 		if(k > 4)
+						 			k -= 4;
 
-				 		sqlServer.sendDataCell("Turn", -1, 1);
- 						sqlServer.sendDataCell("Turn", 1, 2);
+						 		int l = j + 2;
+						 		if(l > 4)
+						 			l -= 4;
 
- 						//change numCards in sql
- 						sqlServer.sendDataCell("numCards", sqlServer.readDataCell("numCards", orderNum) - newGame.getPileCards().size(), orderNum);
-	 				}
-	 			}
-/*				if(sqlServer.readDataCell("Place", 4) == 0){
+						 		if(newGame.isRepeat()){
+		 							flag = true; 
+		 							sqlServer.sendDataCell("Turn", 1, k);// dummy line to break loop
+						 		}
+						 		else if(newGame.isSkip()){
+		 							sqlServer.sendDataCell("Turn", 1, l);
+						 		}
+						 		else{
+		 							sqlServer.sendDataCell("Turn", 1, k);
+		 						}
 
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 4);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 4);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
+		 						//change numCards in sql
+		 						sqlServer.sendDataCell("numCards", sqlServer.readDataCell("numCards", orderNum) - newGame.getPileCards().size(), orderNum);
+			 				}
+			 			}
 
-				}
-				else if(sqlServer.readDataCell("Place", 3) == 0){
 
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 3);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 3);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
+			 			if((orderNum == j) && flag){
+			 				sqlServer.sendDataCell("Turn", 1, j);
+			 				flag = false;
+			 			}
 
-				}
 
-				else if(sqlServer.readDataCell("Place", 2) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 2);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 2);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-					
-				}
-
-				else {
-					//game is over
-					sqlServer.sendDataCell("Place", 4, orderNum);
-					gameRunning = false;
-				}*/
-				//populate prev cards
-				for(int i = 1; i < 5; i++){
-					val = sqlServer.readDataCell("Card" + i + "Value", 1);
-					suit = sqlServer.readDataCell("Card" + i + "Suit", 1);
-				
-					if(val != -1 && suit != -1)
-						prevCards.add(new Card(val, suit));
-				}
-
-				//populate otherPlayers
-				if(orderNum ==1){
-					for(int i = 0; i < 3; i++){
-						otherPlayers[i] = sqlServer.readDataCell("numCards", orderNum + 1 + i);
-						otherPlayersString[i] = sqlServer.readStringCell("Player", orderNum + 1 + i);
-
-					}
-				}
-
-				else{
-					int mod = orderNum + 1;
-
-					for(int i = 1; i < 4; i++){
-						if(orderNum + i >= 5){
-							otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum + i - 4);
-							otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum + i - 4);
+						//populate prev cards
+						for(int i = 1; i < 5; i++){
+							val = sqlServer.readDataCell("Card" + i + "Value", j);
+							suit = sqlServer.readDataCell("Card" + i + "Suit", j);
+						
+							if(val != -1 && suit != -1)
+								prevCards.add(new Card(val, suit));
 						}
+
+						//populate otherPlayers
+						if(orderNum == 1){
+							for(int i = 0; i < 3; i++){
+								otherPlayers[i] = sqlServer.readDataCell("numCards", orderNum + 1 + i);
+								otherPlayersString[i] = sqlServer.readStringCell("Player", orderNum + 1 + i);
+
+							}
+						}
+
 						else{
-							otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum+i);
-							otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum+i);
+							int mod = orderNum + 1;
+
+							for(int i = 1; i < 4; i++){
+								if(orderNum + i >= 5){
+									otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum + i - 4);
+									otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum + i - 4);
+								}
+								else{
+									otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum+i);
+									otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum+i);
+								}
+							}
 						}
-					}
-				}
-	 		}
-
-
-
-	 		System.out.println("Pl1 Turn over");//debug
-/*
-	 		if(sqlServer.readDataCell("Turn", orderNum) == 1)
- 				turn = true;
- 			else
- 				turn = false;*/
-
- 			System.out.println(prevCards.size());
- 			for(int i = 0; i < prevCards.size(); i++){
- 				System.out.println(prevCards.get(i).getSuit());
- 			}
-
- 	
- 			newGame.renderHandOnScreen(currPlayer, otherPlayers, prevCards);	
-
-
-
-
-
- /* PLAYER 2 TURN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`*/
-
- 			if(sqlServer.readDataCell("Place", 2) == 0){
-
- 				System.out.println("P2 Turn start"); 
-
-			 	//check for last played cards, needed for if a person is already done
-				int val, suit;
-				prevCards.clear();
-
-	 			while(sqlServer.readDataCell("Turn", 2) == 1){
-	 				if(orderNum == 2){
-						while(newGame.getTurnOver() == false);
-
-	 					System.out.println("TURNOVER FLAG");
-
-	 					if(newGame.checkDone() == true){
-					 		int count = 1;
-					 		for(int i = 1; i < 5; i++){
-					 			if(sqlServer.readDataCell("Place", i) != 0)
-					 				count++;
-					 		}
-					 		sqlServer.sendDataCell("Place", count, orderNum);
-					 	}
-
-					 	for(int i = 0; i < newGame.getPileCards().size(); i++){
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Value", newGame.getPileCards().get(i).getValue(), 2);
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", newGame.getPileCards().get(i).getSuit(), 2);
-				 		}
-
-				 		for(int i = newGame.getPileCards().size(); i < 4; i++){
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, 2);
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, 2);
-				 		}
-				 		//change turn
-				 		sqlServer.sendDataCell("Turn", -1, 2);
- 						sqlServer.sendDataCell("Turn", 1, 3);
-
-  						//change numCards in sql
- 						sqlServer.sendDataCell("numCards", sqlServer.readDataCell("numCards", orderNum) - newGame.getPileCards().size(), orderNum);
-	 				}
-	 			}
-
-	 			System.out.println("Pl2 Turn over");//debug
-/*				if(sqlServer.readDataCell("Place", 1) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 1);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 1);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-
-				}
-				else if(sqlServer.readDataCell("Place", 4) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 4);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 4);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-
-				}
-
-				else if(sqlServer.readDataCell("Place", 3) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 3);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 3);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-					
-				}
-
-				else {
-					//game is over
-					sqlServer.sendDataCell("Place", 4, orderNum);
-					gameRunning = false;
-				}*/
-
-				//populate prev cards
-				for(int i = 1; i < 5; i++){
-					val = sqlServer.readDataCell("Card" + i + "Value", 2);
-					suit = sqlServer.readDataCell("Card" + i + "Suit", 2);
-				
-					if(val != -1 && suit != -1)
-						prevCards.add(new Card(val, suit));
-				}
-
-				//populate otherPlayers
-				if(orderNum ==1){
-					for(int i = 0; i < 3; i++){
-						otherPlayers[i] = sqlServer.readDataCell("numCards", orderNum + 1 + i);
-						otherPlayersString[i] = sqlServer.readStringCell("Player", orderNum + 1 + i);
-
-					}
-				}
-
-				else{
-					int mod = orderNum + 1;
-
-					for(int i = 1; i < 4; i++){
-						if(orderNum + i >= 5){
-							otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum + i - 4);
-							otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum + i - 4);
-						}
-						else{
-							otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum+i);
-							otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum+i);
-						}
-					}	
-				}
-	 		}
-
-	 		
-
-/* 			if(sqlServer.readDataCell("Turn", orderNum) == 1)
- 				turn = true;
- 			else
- 				turn = false;*/
-
- 			newGame.renderHandOnScreen(currPlayer, otherPlayers, prevCards);	
-
-
- /* PLAYER 3 TURN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-
- 			if(sqlServer.readDataCell("Place", 3) == 0){
-				int val, suit;
-				prevCards.clear();
-
-	 			while(sqlServer.readDataCell("Turn", 3) == 1){
-	 				if(orderNum == 3){
-						while(newGame.getTurnOver() == false);
-
-	 					System.out.println("TURNOVER FLAG");
-
-	 					if(newGame.checkDone() == true){
-					 		int count = 1;
-					 		for(int i = 1; i < 5; i++){
-					 			if(sqlServer.readDataCell("Place", i) != 0)
-					 				count++;
-					 		}
-					 		sqlServer.sendDataCell("Place", count, orderNum);
-					 	}
-
-					 	for(int i = 0; i < newGame.getPileCards().size(); i++){
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Value", newGame.getPileCards().get(i).getValue(), 3);
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", newGame.getPileCards().get(i).getSuit(), 3);
-				 		}
-
-				 		for(int i = newGame.getPileCards().size(); i < 4; i++){
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, 3);
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, 3);
-				 		}
-				 		//change turn
-				 		sqlServer.sendDataCell("Turn", -1, 3);
- 						sqlServer.sendDataCell("Turn", 1, 4);
-
- 						//change numCards in sql
- 						sqlServer.sendDataCell("numCards", sqlServer.readDataCell("numCards", orderNum) - newGame.getPileCards().size(), orderNum);
-	 				}
-
-	 			}
-/*
-	 			if(sqlServer.readDataCell("Place", 2) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 2);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 2);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-
-				}
-				else if(sqlServer.readDataCell("Place", 1) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 1);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 1);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-
-				}
-
-				else if(sqlServer.readDataCell("Place", 4) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 4);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 4);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-					
-				}
-
-				else {
-					//game is over
-					sqlServer.sendDataCell("Place", 4, orderNum);
-					gameRunning = false;
-				}*/
-
-				//populate prev cards
-				for(int i = 1; i < 5; i++){
-					val = sqlServer.readDataCell("Card" + i + "Value", 3);
-					suit = sqlServer.readDataCell("Card" + i + "Suit", 3);
-				
-					if(val != -1 && suit != -1)
-						prevCards.add(new Card(val, suit));
-				}
-
-				//populate otherPlayers
-				if(orderNum ==1){
-					for(int i = 0; i < 3; i++){
-						otherPlayers[i] = sqlServer.readDataCell("numCards", orderNum + 1 + i);
-						otherPlayersString[i] = sqlServer.readStringCell("Player", orderNum + 1 + i);
-
-					}
-				}
-
-				else{
-					int mod = orderNum + 1;
-
-					for(int i = 1; i < 4; i++){
-						if(orderNum + i >= 5){
-							otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum + i - 4);
-							otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum + i - 4);
-						}
-						else{
-							otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum+i);
-							otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum+i);
-						}
-					}	
-				}
-	 		}
-
-	 		System.out.println("Pl3 Turn over");//debug
-
-/*	 		if(sqlServer.readDataCell("Turn", orderNum) == 1)
- 				turn = true;
- 			else
- 				turn = false;*/
-
- 			newGame.renderHandOnScreen(currPlayer, otherPlayers, prevCards);	
-
-
- /* PLAYER 4 TURN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
- 			if(sqlServer.readDataCell("Place", 4) == 0){
-				int val, suit;
-				prevCards.clear();
-
-	  			while(sqlServer.readDataCell("Turn", 4) == 1){
-	 				if(orderNum == 4){
-						while(newGame.getTurnOver() == false);
-
-	 					System.out.println("TURNOVER FLAG");
-	 					
-	 					//can move all of this to pilelogic
-	 					if(newGame.checkDone() == true){
-					 		int count = 1;
-					 		for(int i = 1; i < 5; i++){
-					 			if(sqlServer.readDataCell("Place", i) != 0)
-					 				count++;
-					 		}
-					 		sqlServer.sendDataCell("Place", count, orderNum);
-					 	}
-
-					 	for(int i = 0; i < newGame.getPileCards().size(); i++){
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Value", newGame.getPileCards().get(i).getValue(), 4);
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", newGame.getPileCards().get(i).getSuit(), 4);
-				 		}
-
-				 		for(int i = newGame.getPileCards().size(); i < 4; i++){
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, 4);
-				 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, 4);
-				 		}
-				 		//change turn
-				 		sqlServer.sendDataCell("Turn", -1, 4);
- 						sqlServer.sendDataCell("Turn", 1, 1);
-
- 						//change numCards in sql
- 						sqlServer.sendDataCell("numCards", sqlServer.readDataCell("numCards", orderNum) - newGame.getPileCards().size(), orderNum);
-	 				}
-	 			}
-	 			
-/*	 			if(sqlServer.readDataCell("Place", 3) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 3);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 3);
-					
-						if(val != -1 && suit != -1)	
-							prevCards.add(new Card(val, suit));
-					}
-
-				}
-				else if(sqlServer.readDataCell("Place", 2) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 2);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 2);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-
-				}
-
-				else if(sqlServer.readDataCell("Place", 1) == 0){
-
-					for(int i = 1; i < 5; i++){
-						val = sqlServer.readDataCell("Card" + i + "Value", 1);
-						suit = sqlServer.readDataCell("Card" + i + "Suit", 1);
-					
-						if(val != -1 && suit != -1)
-							prevCards.add(new Card(val, suit));
-					}
-					
-				}
-
-				else {
-					//game is over
-					sqlServer.sendDataCell("Place", 4, orderNum);
-					gameRunning = false;
-				}*/
-
-				//populate prev cards
-				for(int i = 1; i < 5; i++){
-					val = sqlServer.readDataCell("Card" + i + "Value", 4);
-					suit = sqlServer.readDataCell("Card" + i + "Suit", 4);
-				
-					if(val != -1 && suit != -1)
-						prevCards.add(new Card(val, suit));
-				}
-
-
-				//populate otherPlayers
-				if(orderNum ==1){
-					for(int i = 0; i < 3; i++){
-						otherPlayers[i] = sqlServer.readDataCell("numCards", orderNum + 1 + i);
-						otherPlayersString[i] = sqlServer.readStringCell("Player", orderNum + 1 + i);
-
-					}
-				}
-
-				else{
-					int mod = orderNum + 1;
-
-					for(int i = 1; i < 4; i++){
-						if(orderNum + i >= 5){
-							otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum + i - 4);
-							otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum + i - 4);
-						}
-						else{
-							otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum+i);
-							otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum+i);
-						}
-					}
-				}
-
-	 		}
-	 		System.out.println("Pl4 Turn over");//debug
-
-	/* 		if(sqlServer.readDataCell("Turn", orderNum) == 1)
-	 			turn = true;
-	 		else
-	 			turn = false;*/
-	 			
-	  		newGame.renderHandOnScreen(currPlayer, otherPlayers, prevCards);	
- 		}
+			 		}
+			 		
+		 			newGame.renderHandOnScreen(currPlayer, otherPlayers, prevCards);	
+			}
+		}
 	}
 		
 		

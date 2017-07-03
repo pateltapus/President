@@ -170,4 +170,12 @@ public class PresidentGUI extends JFrame{
 		jpanelGame.setOrderNumPanel(temp);
 	}
 
+	public boolean isSkip(){//todo
+		return jpanelGame.getPanelSkip();
+	}
+
+	public boolean isRepeat(){//todo
+		return jpanelGame.getPanelRepeat();
+	}
+
 }

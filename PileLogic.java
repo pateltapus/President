@@ -4,6 +4,8 @@ public class PileLogic{
 	private int pileValue;
 	private int passPlayCounter;
 	private int pileCount;
+	private boolean skip = false;
+	private boolean repeat = false;
 
 	
 	public PileLogic(){
@@ -63,22 +65,21 @@ public class PileLogic{
 			return true;
 		}
 			
-		//can deal with finishing a set here at a later time
-		//take append the two strings and check if it is 4x a single number
-		/*  
-			String checkFour = pileValue.toString(pileValue);
-			checkFour.append(queuePower);
-			String fourOfAKind;
-			for(int i = 0; i < 4; i++){
-				fourOfAKind.append(queuedCards.get(0));
-			}
-			if(checkFour == fourOfAKind){
-				this.pileValue = 0;
-				this.passPlayCounter = 0;
-				this.playerTurn = playerTurn;
+		//can deal with finishing a set here 
+		if(!(queuedCards.isEmpty())){
+			if(pileValue == queuedCards.get(0).getValue() && pileCount + queuedCards.size() == 4){
 				return true;
 			}
-		*/
+		}
+
+		//can deal with same skips here
+		if(!(queuedCards.isEmpty())){
+			if((pileValue == queuedCards.get(0).getValue()) && (pileCount == queuedCards.size())){
+				return true;
+			}
+		}
+		
+		
 		int powerValue = 0;
 		if(!queuedCards.isEmpty())
 			powerValue = queuedCards.get(0).getValue();
@@ -110,25 +111,27 @@ public class PileLogic{
 		ArrayList<Card> queuedCards = new ArrayList<Card>();
 		queuedCards.addAll(inputCards);
 
-		if(((queuedCards.size() == 1 && queuedCards.get(0).getValue()==2) || queuedCards.size()==4))
+		if(((queuedCards.size() == 1 && queuedCards.get(0).getValue()==2) || queuedCards.size()==4)){
+			repeat = true;
 			return true;
+		}
 			
-		//can deal with finishing a set here at a later time
-		//take append the two strings and check if it is 4x a single number
-		/*  
-			String checkFour = pileValue.toString(pileValue);
-			checkFour.append(queuePower);
-			String fourOfAKind;
-			for(int i = 0; i < 4; i++){
-				fourOfAKind.append(queuedCards.get(0));
-			}
-			if(checkFour == fourOfAKind){
-				this.pileValue = 0;
-				this.passPlayCounter = 0;
-				this.playerTurn = playerTurn;
+		//can deal with finishing a set here
+		if(!(queuedCards.isEmpty())){
+			if((pileValue == queuedCards.get(0).getValue()) && ((pileCount + queuedCards.size()) == 4)){
+				repeat = true;
 				return true;
 			}
-		*/
+		}
+
+		//can deal with same skips here
+		if(!(queuedCards.isEmpty())){
+			if((pileValue == queuedCards.get(0).getValue()) && (pileCount == queuedCards.size())){
+				skip = true;
+				return true;
+			}
+		}
+
 		int powerValue = 0;
 		if(!queuedCards.isEmpty())
 			powerValue = queuedCards.get(0).getValue();
@@ -162,5 +165,21 @@ public class PileLogic{
 
 	public void resetPileCount(){
 			this.passPlayCounter = 0;
+	}
+
+	public boolean getSkip(){
+		return skip;
+	}
+
+	public boolean getRepeat(){
+		return repeat;
+	}
+
+	public void resetSkip(){
+		skip = false;
+	}
+
+	public void resetRepeat(){
+		repeat = false;
 	}
 }
