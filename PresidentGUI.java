@@ -178,4 +178,9 @@ public class PresidentGUI extends JFrame{
 		return jpanelGame.getPanelRepeat();
 	}
 
+	public void getWinscreen(int rank){
+		int temp = rank;
+		jpanelGame.renderWinscreen(temp);
+	}
+
 }

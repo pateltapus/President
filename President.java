@@ -130,49 +130,60 @@ public class President{
 							 				count++;
 							 		}
 							 		sqlServer.sendDataCell("Place", count, orderNum);
+							 		newGame.getWinscreen(sqlServer.readDataCell("Place", orderNum));
+							 		if(sqlServer.readDataCell("Place", orderNum) == 3){
+							 			for(int i = 1; i < 5; i ++){
+							 				if(sqlServer.readDataCell("Place", i) == 0){
+							 					sqlServer.sendDataCell("Place", 4, i);
+							 					break;
+							 				}
+							 			}
+							 		}
 
 							 	}
 
-							 	for(int i = 0; i < newGame.getPileCards().size(); i++){
-							 		if(newGame.getPileCards().get(i).getValue() == 2){
+							 	else{
+
+								 	for(int i = 0; i < newGame.getPileCards().size(); i++){
+								 		if(newGame.getPileCards().get(i).getValue() == 2){
+								 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, j);
+								 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, j);					 			
+								 		}
+								 		else{
+								 			sqlServer.sendDataCell("Card" + (i+1) + "Value", newGame.getPileCards().get(i).getValue(), j);
+								 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", newGame.getPileCards().get(i).getSuit(), j);
+								 		}
+							 		}
+
+							 		for(int i = newGame.getPileCards().size(); i < 4; i++){
 							 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, j);
-							 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, j);					 			
+							 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, j);
+							 		}
+
+							 		//change turn
+							 		sqlServer.sendDataCell("Turn", -1, orderNum);
+
+							 		int k = j + 1;
+							 		if(k > 4)
+							 			k -= 4;
+
+							 		int l = j + 2;
+							 		if(l > 4)
+							 			l -= 4;
+
+							 		if(newGame.isRepeat()){
+			 							flag = true; 
+							 		}
+							 		else if(newGame.isSkip()){
+			 							sqlServer.sendDataCell("Turn", 1, l);
 							 		}
 							 		else{
-							 			sqlServer.sendDataCell("Card" + (i+1) + "Value", newGame.getPileCards().get(i).getValue(), j);
-							 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", newGame.getPileCards().get(i).getSuit(), j);
-							 		}
-						 		}
+			 							sqlServer.sendDataCell("Turn", 1, k);
+			 						}
 
-						 		for(int i = newGame.getPileCards().size(); i < 4; i++){
-						 			sqlServer.sendDataCell("Card" + (i+1) + "Value", -1, j);
-						 			sqlServer.sendDataCell("Card" + (i+1) + "Suit", -1, j);
-						 		}
-
-						 		//change turn
-						 		sqlServer.sendDataCell("Turn", -1, orderNum);
-
-						 		int k = j + 1;
-						 		if(k > 4)
-						 			k -= 4;
-
-						 		int l = j + 2;
-						 		if(l > 4)
-						 			l -= 4;
-
-						 		if(newGame.isRepeat()){
-		 							flag = true; 
-		 							sqlServer.sendDataCell("Turn", 1, k);// dummy line to break loop
-						 		}
-						 		else if(newGame.isSkip()){
-		 							sqlServer.sendDataCell("Turn", 1, l);
-						 		}
-						 		else{
-		 							sqlServer.sendDataCell("Turn", 1, k);
-		 						}
-
-		 						//change numCards in sql
-		 						sqlServer.sendDataCell("numCards", sqlServer.readDataCell("numCards", orderNum) - newGame.getPileCards().size(), orderNum);
+			 						//change numCards in sql
+			 						sqlServer.sendDataCell("numCards", sqlServer.readDataCell("numCards", orderNum) - newGame.getPileCards().size(), orderNum);
+			 					}
 			 				}
 			 			}
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class PresidentPanel extends JPanel{
 
-	private BufferedImage cardBackSS, cardsSS, playButton, playButtonGrey, passButton, passButtonGrey, background;
+	private BufferedImage cardBackSS, cardsSS, playButton, playButtonGrey, passButton, passButtonGrey, background, winScreen1, winScreen2, winScreen3, winScreen4;
 	private BufferedImage[][] cardBackImages, cardImages;
 	private static String cardBackPath, cardsPath;
 	private ArrayList<Integer> xMax, xMin;
@@ -23,6 +23,7 @@ public class PresidentPanel extends JPanel{
 	private int[] otherHands;
 	private JLabel p1Name, p2Name, p3Name, p4Name;
 	private Server server;
+	private int winScreen = 0;
 
 	private int orderNum = 0;
 
@@ -141,6 +142,31 @@ public class PresidentPanel extends JPanel{
 		catch(Exception e){
 			System.out.println("Exception in background" + e.toString());
 		}
+		try{
+			winScreen1 = ImageIO.read(new File("Images/Frames/Winscreen1.png"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in winScreen1" + e.toString());
+		}
+		try{
+			winScreen2 = ImageIO.read(new File("Images/Frames/Winscreen2.png"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in winScreen2" + e.toString());
+		}
+		try{
+			winScreen3 = ImageIO.read(new File("Images/Frames/Winscreen3.png"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in winScreen3" + e.toString());
+		}
+		try{
+			winScreen4 = ImageIO.read(new File("Images/Frames/Winscreen4.png"));
+		}
+		catch(Exception e){
+			System.out.println("Exception in winScreen4" + e.toString());
+		}
+
 
 		server = new Server();
 
@@ -163,68 +189,85 @@ public class PresidentPanel extends JPanel{
 	@Override
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
-		//TODO: FIX LOW GRAPHICS QUALITY ISSUE
+		
+		if(winScreen != 0){
 
-		//TODO: Find and implement a nice felt background
-		g.drawImage(background, 0, 0, null);
-
-		//print other hands		
-
-		//left
-		for(int i = otherHands[0]-1; i > -1; i--){
-			int j = 20; //change later for scaling
-			int k = 400 - otherHands[0]*20; 
-				g.drawImage(rotate90ToRight(cardBackImages[0][0]), INITX2, i*j+k, HEIGHT/2, WIDTH/2, null); 
+			switch(winScreen){
+				case 1:	g.drawImage(winScreen1, 0, 0, null);
+						break;
+				case 2:	g.drawImage(winScreen2, 0, 0, null);
+						break;
+				case 3:	g.drawImage(winScreen3, 0, 0, null);
+						break;
+				case 4:	g.drawImage(winScreen4, 0, 0, null);
+						break;
+				default: System.out.println("error in winScreen");
+						 break;
+			}
 		}
 
-		//top
-		for(int i = 0; i < otherHands[1]; i++){
-			int j = 20; //change later for scaling
-			int k = 545 - otherHands[1]*20; 
-				g.drawImage(rotate180(cardBackImages[0][0]), i*j+k, INITY3, WIDTH/2, HEIGHT/2, null);
-		}
+		else{
+			//TODO: Find and implement a nice felt background
+			g.drawImage(background, 0, 0, null);
 
-		//right
-		for(int i = 0; i < otherHands[2]; i++){
-			int j = 20; //change later for scaling
-			int k = 400 - otherHands[2]*20; 
-				g.drawImage(rotate90ToLeft(cardBackImages[0][0]), INITX4, i*j+k, HEIGHT/2, WIDTH/2, null); 
-		}
+			//print other hands		
+
+			//left
+			for(int i = otherHands[0]-1; i > -1; i--){
+				int j = 20; //change later for scaling
+				int k = 400 - otherHands[0]*20; 
+					g.drawImage(rotate90ToRight(cardBackImages[0][0]), INITX2, i*j+k, HEIGHT/2, WIDTH/2, null); 
+			}
+
+			//top
+			for(int i = 0; i < otherHands[1]; i++){
+				int j = 20; //change later for scaling
+				int k = 545 - otherHands[1]*20; 
+					g.drawImage(rotate180(cardBackImages[0][0]), i*j+k, INITY3, WIDTH/2, HEIGHT/2, null);
+			}
+
+			//right
+			for(int i = 0; i < otherHands[2]; i++){
+				int j = 20; //change later for scaling
+				int k = 400 - otherHands[2]*20; 
+					g.drawImage(rotate90ToLeft(cardBackImages[0][0]), INITX4, i*j+k, HEIGHT/2, WIDTH/2, null); 
+			}
 
 
-		//print our hand
-		if(currentHand != null){
-			if(!playedCards.isEmpty()){
-				if(playedCards.get(0).getValue() !=2 && !(playedCards.size()==4)){
-					if(!playedCards.isEmpty()){
-						int k = 30;
-						for(int i = 0; i < playedCards.size(); i++)
-							g.drawImage(cardImages[3-playedCards.get(i).getSuit()][playedCards.get(i).getValue()-2], PILEX + k*i - playedCards.size()*8 , PILEY, WIDTH/2, HEIGHT/2, null);
+			//print our hand
+			if(currentHand != null){
+				if(!playedCards.isEmpty()){
+					if(playedCards.get(0).getValue() !=2 && !(playedCards.size()==4)){
+						if(!playedCards.isEmpty()){
+							int k = 30;
+							for(int i = 0; i < playedCards.size(); i++)
+								g.drawImage(cardImages[3-playedCards.get(i).getSuit()][playedCards.get(i).getValue()-2], PILEX + k*i - playedCards.size()*8 , PILEY, WIDTH/2, HEIGHT/2, null);
+						}
 					}
-				}
-			}	
-			if (logicChecker.checkPlayButton(cardQueue)&&(server.readDataCell("Turn", orderNum)==1)) //has to check turn ***
-				g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
-			else
-				g.drawImage(playButtonGrey,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
-			
-			if (logicChecker.checkPassButton(cardQueue)&&(server.readDataCell("Turn", orderNum)==1)) //has to check turn ***
-				g.drawImage(passButton,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
-			else
-				g.drawImage(passButtonGrey,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+				}	
+				if (logicChecker.checkPlayButton(cardQueue)&&(server.readDataCell("Turn", orderNum)==1)) //has to check turn ***
+					g.drawImage(playButton,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+				else
+					g.drawImage(playButtonGrey,PLAYBUTTONX, PLAYBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+				
+				if (logicChecker.checkPassButton(cardQueue)&&(server.readDataCell("Turn", orderNum)==1)) //has to check turn ***
+					g.drawImage(passButton,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
+				else
+					g.drawImage(passButtonGrey,PASSBUTTONX, PASSBUTTONY, BUTTONWIDTH, BUTTONHEIGHT, null);
 
-			if(currentHand.getHandSize() != 0){
-				xMin.clear();
-				for(int i = 0; i < currentHand.getHandSize(); i++){
-					int j = 40; //change later for scaling
-					int k = 410 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
-					if(raisedCards.get(i))
-						g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY+DELTAY, WIDTH/2, HEIGHT/2, null); //140 190 
-					else
-						g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY, WIDTH/2, HEIGHT/2, null); //140 190 
-					xMin.add(i*j+k);
+				if(currentHand.getHandSize() != 0){
+					xMin.clear();
+					for(int i = 0; i < currentHand.getHandSize(); i++){
+						int j = 40; //change later for scaling
+						int k = 410 - currentHand.getHandSize()*20; //change later for scaling, 120 for 13 cards
+						if(raisedCards.get(i))
+							g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY+DELTAY, WIDTH/2, HEIGHT/2, null); //140 190 
+						else
+							g.drawImage(cardImages[3-currentHand.getCardFromLoc(i).getSuit()][currentHand.getCardFromLoc(i).getValue()-2], i*j+k, INITY, WIDTH/2, HEIGHT/2, null); //140 190 
+						xMin.add(i*j+k);
+					}
+					createXMax();
 				}
-				createXMax();
 			}
 		}
 	}
@@ -540,6 +583,10 @@ public class PresidentPanel extends JPanel{
 
 	public void setOrderNumPanel(int val){
 		this.orderNum = val;
+	}
+
+	public void renderWinscreen(int val){
+		this.winScreen = val;
 	}
 
 
