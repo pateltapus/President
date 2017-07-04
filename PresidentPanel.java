@@ -29,6 +29,7 @@ public class PresidentPanel extends JPanel{
 	private PileLogic logicChecker;
 	private ArrayList<Boolean> raisedCards;
 	private int[] otherHands;
+	private int[] otherPlayersID;
 	private Server server;
 	private int winScreen = 0;
 
@@ -107,6 +108,7 @@ public class PresidentPanel extends JPanel{
 		this.playedCards = new ArrayList<Card>();
 		this.passedCards = new ArrayList<Card>();
 		this.otherHands = new int[3];
+		this.otherPlayersID = new int[3];
 
 		cardBackImages = new BufferedImage[cbROWS][cbCOLS]; //5 rows 3 columns,  ****ROWS PARSE DESIGN, COLS PARSE COLOR****
 		cardImages = new BufferedImage[cROWS][cCOLS] ;//4 rows 13 columns   ****ROWS PARSE SUIT, COLS PARSE NUMBER****
@@ -298,13 +300,13 @@ public class PresidentPanel extends JPanel{
 			}
 			g.setFont(new Font("PassionOne-Regular", Font.PLAIN, 40));
 			g.setColor(Color.white);
-			g.drawString("Joe", 45, 500);
-			g.drawString("Sam", 100, 70);
-			g.drawString("Bob", 780, 70);
+			g.drawString(server.readStringCell("Player", otherPlayersID[0]), 45, 500);
+			g.drawString(server.readStringCell("Player", otherPlayersID[1]), 180, 80);
+			g.drawString(server.readStringCell("Player", otherPlayersID[2]), 780, 110);
 		}
 	}
 
-	public void renderAHand(Hand handPrint, int[] otherPlayers, ArrayList<Card> newCards){
+	public void renderAHand(Hand handPrint, int[] otherPlayers, int[] otherPlayersSQLID, ArrayList<Card> newCards){
 		//clear values for new turn
 
 		//render last passed cards; set playedCards to last passed cards
@@ -345,6 +347,7 @@ public class PresidentPanel extends JPanel{
 		passedCards.clear();
 		currentHand = handPrint;
 		otherHands = otherPlayers.clone();
+		otherPlayersID = otherPlayersSQLID.clone();
 		System.out.println(otherHands.length); //debug
 		for(int i = 0; i < currentHand.getHandSize(); i++)
 			raisedCards.add(false);

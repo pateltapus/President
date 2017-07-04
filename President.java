@@ -48,15 +48,15 @@ public class President{
 		System.out.println("FLAG2");
 
 		int otherPlayers[] = new int[3];
-		String otherPlayersString[] = new String[3];
+		int otherPlayersID[] = new int[3];
+
 
 		System.out.println("FLAG3");
 
 		if(orderNum ==1){
 			for(int i = 0; i < 3; i++){
 				otherPlayers[i] = sqlServer.readDataCell("numCards", orderNum + 1 + i);
-				otherPlayersString[i] = sqlServer.readStringCell("Player", orderNum + 1 + i);
-
+				otherPlayersID[i] = orderNum + 1 + i;
 			}
 		}
 
@@ -66,27 +66,20 @@ public class President{
 			for(int i = 1; i < 4; i++){
 				if(orderNum + i >= 5){
 					otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum + i - 4);
-					otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum + i - 4);
+					otherPlayersID[(orderNum + i) % mod] = orderNum + i - 4;
 				}
 				else{
 					otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum+i);
-					otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum+i);
+					otherPlayersID[(orderNum + i) % mod] = orderNum+i;
 				}
 			}	
 		}
 
 		System.out.println("FLAG4");
 
-		System.out.println("OtherPlayers size: " + otherPlayersString.length);
-
-		for(int i = 0; i<otherPlayersString.length; i++){
-				System.out.println(otherPlayersString[i]);
-		}
 
 		ArrayList<Card> prevCards = new ArrayList<Card>(); //last passed cards
 
-		for(int i = 0; i < otherPlayersString.length; i++)
-			System.out.println(otherPlayersString[i]);
 
 		if(orderNum == 4) //clear initial hands once each local machine has them
 			sqlServer.clearHandTable();
@@ -100,7 +93,7 @@ public class President{
  			turn = false;*/
  		newGame.createGameScreen();
  		newGame.setOrderNum(orderNum);
-		newGame.renderHandOnScreen(currPlayer, otherPlayers, prevCards);
+		newGame.renderHandOnScreen(currPlayer, otherPlayers, otherPlayersID, prevCards);
 
 		//gameLoop
 		boolean gameRunning = true;
@@ -207,7 +200,6 @@ public class President{
 							if(orderNum == 1){
 								for(int i = 0; i < 3; i++){
 									otherPlayers[i] = sqlServer.readDataCell("numCards", orderNum + 1 + i);
-									otherPlayersString[i] = sqlServer.readStringCell("Player", orderNum + 1 + i);
 
 								}
 							}
@@ -218,11 +210,9 @@ public class President{
 								for(int i = 1; i < 4; i++){
 									if(orderNum + i >= 5){
 										otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum + i - 4);
-										otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum + i - 4);
 									}
 									else{
 										otherPlayers[(orderNum + i) % mod] = sqlServer.readDataCell("numCards", orderNum+i);
-										otherPlayersString[(orderNum + i) % mod] = sqlServer.readStringCell("Player", orderNum+i);
 									}
 								}
 							}
@@ -241,7 +231,7 @@ public class President{
 					 	}	 		
 				 	}
 			 		
-		 			newGame.renderHandOnScreen(currPlayer, otherPlayers, prevCards);	
+		 			newGame.renderHandOnScreen(currPlayer, otherPlayers, otherPlayersID, prevCards);	
 			}
 		}
 	}

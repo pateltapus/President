@@ -135,10 +135,12 @@ public class PresidentGUI extends JFrame{
 	}
 
 	//DEBUG
-	public void renderHandOnScreen(Player currPlayer, int[] otherPlayers, ArrayList<Card> playedCards){
+	public void renderHandOnScreen(Player currPlayer, int[] otherPlayers, int[] otherPlayersID, ArrayList<Card> playedCards){
 
 		int players[] = new int[3];
+		int playersID[] = new int[3];
 		players = otherPlayers.clone();
+		playersID = otherPlayersID.clone();
 
 		//System.out.println(playedCards.size());
 		ArrayList<Card> temp = new ArrayList<Card>();
@@ -148,7 +150,7 @@ public class PresidentGUI extends JFrame{
 		this.add(jpanelGame);
 		this.setVisible(true);
 
-		jpanelGame.renderAHand(currPlayer.getHand(), players, temp);
+		jpanelGame.renderAHand(currPlayer.getHand(), players, playersID, temp);
 	}
 
 	public boolean checkDone(){
