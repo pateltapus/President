@@ -1,7 +1,0 @@
-
-
-Cool Features:
-
-Dealing Cards animation
-
-invisMagenta = (255,0,128)

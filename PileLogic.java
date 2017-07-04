@@ -2,15 +2,13 @@ import java.util.ArrayList;
 
 public class PileLogic{
 	private int pileValue;
-	private int passPlayCounter;
 	private int pileCount;
 	private boolean skip = false;
 	private boolean repeat = false;
-
+	private boolean clear = false;
 	
 	public PileLogic(){
 		this.pileValue = 1;
-		this.passPlayCounter = 0;
 		this.pileCount = 0;
 	}
 	
@@ -29,13 +27,6 @@ public class PileLogic{
 				return false;
 		}
 		return true;
-	}
-	
-	public void checkRefresh(){ //called at the start of a turn
-		if(this.passPlayCounter == 3){
-			this.pileValue = 0;
-			this.pileCount = 1;
-		}
 	}
 	
 	public boolean checkWin(ArrayList<Card> inputHand){
@@ -62,12 +53,14 @@ public class PileLogic{
 /*			this.pileValue = 0;
 			this.passPlayCounter = 0;
 			this.pileCount = 1;*/
+			this.clear = true;
 			return true;
 		}
 			
 		//can deal with finishing a set here 
 		if(!(queuedCards.isEmpty())){
 			if(pileValue == queuedCards.get(0).getValue() && pileCount + queuedCards.size() == 4){
+				this.clear = true;
 				return true;
 			}
 		}
@@ -90,19 +83,6 @@ public class PileLogic{
 			return true;
 		}
 		else{
-			return false;
-		}
-	}
-	
-	public boolean checkPass(ArrayList<Card> inputCards){
-		ArrayList<Card> queuedCards = new ArrayList<Card>();
-		queuedCards.addAll(inputCards);
-
-		if (queuedCards.size() == 0){
-			/*this.passPlayCounter++;*/
-			return true;
-		}
-		else {
 			return false;
 		}
 	}
@@ -163,10 +143,6 @@ public class PileLogic{
 			this.pileValue = oldCards.get(0).getValue();
 	}
 
-	public void resetPileCount(){
-			this.passPlayCounter = 0;
-	}
-
 	public boolean getSkip(){
 		return skip;
 	}
@@ -175,11 +151,18 @@ public class PileLogic{
 		return repeat;
 	}
 
+	public boolean getClear(){
+		return clear;
+	}
 	public void resetSkip(){
 		skip = false;
 	}
 
 	public void resetRepeat(){
 		repeat = false;
+	}
+
+	public void resetClear(){
+		clear = false;
 	}
 }

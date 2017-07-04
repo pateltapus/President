@@ -131,6 +131,7 @@ public class PresidentGUI extends JFrame{
 
 	public void createGameScreen(){
 		jpanelGame = new PresidentPanel("Images/Spritesheets/playingCardBacks.png","Images/Spritesheets/playingCards.png");
+		jpanelGame.setLayout(null);
 	}
 
 	//DEBUG
@@ -178,9 +179,17 @@ public class PresidentGUI extends JFrame{
 		return jpanelGame.getPanelRepeat();
 	}
 
+	public boolean isClear(){
+		return jpanelGame.getPanelClear();
+	}
+
 	public void getWinscreen(int rank){
 		int temp = rank;
 		jpanelGame.renderWinscreen(temp);
+	}
+
+	public boolean getPanelPassed(){
+		return jpanelGame.getPassed();
 	}
 
 }

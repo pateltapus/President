@@ -1,9 +1,17 @@
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.GraphicsEnvironment;
+import java.io.*;
+import java.awt.FontFormatException;
+import java.awt.RenderingHints;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
+import java.util.Map;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,7 +29,6 @@ public class PresidentPanel extends JPanel{
 	private PileLogic logicChecker;
 	private ArrayList<Boolean> raisedCards;
 	private int[] otherHands;
-	private JLabel p1Name, p2Name, p3Name, p4Name;
 	private Server server;
 	private int winScreen = 0;
 
@@ -31,6 +38,7 @@ public class PresidentPanel extends JPanel{
 	private Hand currentHand;
 	private boolean noCards = false;
 	private boolean turnDone = false;
+	private boolean passed = false;
 	
 	private static final int cbROWS = 5;
 	private static final int cbCOLS = 3;
@@ -73,6 +81,20 @@ public class PresidentPanel extends JPanel{
 		y = 0;
 		z = 0;
 		//------------/
+		try {
+    	//create the font to use. Specify the size!
+    	Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("PassionOne-Regular.otf"));
+    	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    	//register the font
+    	ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("PassionOne-Regular.otf")));
+    }
+		catch (IOException e) {
+    	e.printStackTrace();
+} 
+		catch(FontFormatException e) {
+    	e.printStackTrace();
+}
+
 
 		//this.updatePile = false;
 		this.cardBackPath = cardBackPath;
@@ -190,6 +212,12 @@ public class PresidentPanel extends JPanel{
 	public void paint(Graphics g){ //override paint method provided by JPanel
 		super.paint(g);
 		
+		Map<?, ?> desktopHints = (Map<?, ?>) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");
+		Graphics2D g2d = (Graphics2D) g;
+		if (desktopHints != null) {
+    		g2d.setRenderingHints(desktopHints);
+		}
+		
 		if(winScreen != 0){
 
 			switch(winScreen){
@@ -207,7 +235,6 @@ public class PresidentPanel extends JPanel{
 		}
 
 		else{
-			//TODO: Find and implement a nice felt background
 			g.drawImage(background, 0, 0, null);
 
 			//print other hands		
@@ -269,6 +296,11 @@ public class PresidentPanel extends JPanel{
 					createXMax();
 				}
 			}
+			g.setFont(new Font("PassionOne-Regular", Font.PLAIN, 40));
+			g.setColor(Color.white);
+			g.drawString("Joe", 45, 500);
+			g.drawString("Sam", 100, 70);
+			g.drawString("Bob", 780, 70);
 		}
 	}
 
@@ -277,9 +309,11 @@ public class PresidentPanel extends JPanel{
 
 		//render last passed cards; set playedCards to last passed cards
 		turnDone = false;
+		passed = false;
 
 		logicChecker.resetSkip();
 		logicChecker.resetRepeat();
+		logicChecker.resetClear();
 
 		playedCards.clear();
 		playedCards.addAll(newCards);
@@ -288,7 +322,7 @@ public class PresidentPanel extends JPanel{
 
 		//set pilevalue
 		logicChecker.setPileValue(playedCards);
-
+/*
 		//set passPlayCounter
 		boolean reset = true; 
 		for(int i = 1; i < 5; i++){ //all players
@@ -299,9 +333,9 @@ public class PresidentPanel extends JPanel{
 		}
 
 		if(reset)
-			logicChecker.resetPileCount();
+			logicChecker.resetPile();
 
-
+*/
 		//DEBUG
 		//System.out.println(playedCards.size());
 		//for(int i = 0; i < playedCards.size(); i++){
@@ -421,25 +455,32 @@ public class PresidentPanel extends JPanel{
 				currentHand.sortHand();
 				passedCards.addAll(cardQueue);
 				cardQueue.clear();
-				if(currentHand.getHandSize() == 0){
+				boolean onlyTwos = false;
+				if(currentHand.getHandSize() == 0)
+					onlyTwos = true;
+				else{
+					onlyTwos = true;
+					for(int i = 0; i < currentHand.getHandSize(); i++){
+						if(currentHand.getCardFromLoc(i).getValue() != 2){
+							onlyTwos = false;
+							break;
+						}
+					}
+				}
+
+				if(onlyTwos){
 					noCards = true;
 				}
 
 				turnDone = true;
-
-				//TODO:
-				//change turn
 			}
 		}
 		else if(me.getX()>PASSBUTTONX && me.getX()<PASSBUTTONX+BUTTONWIDTH  && me.getY()>PASSBUTTONY   && me.getY()<PASSBUTTONY+BUTTONHEIGHT  && logicChecker.checkPassButton(cardQueue)){
-			if(logicChecker.checkPass(cardQueue)){
-				//TODO:
-				//change turn
-				passedCards.clear();
-				turnDone = true;
-			}
-
+			passedCards.clear();
+			passedCards.addAll(playedCards);
+			passed = true;
 			turnDone = true;
+
 		}
 	
 	}
@@ -581,6 +622,14 @@ public class PresidentPanel extends JPanel{
 		return logicChecker.getRepeat();
 	}
 
+	public boolean getPanelClear(){
+		return logicChecker.getClear();
+	}
+
+	public boolean getPassed(){
+		return passed;
+	}
+
 	public void setOrderNumPanel(int val){
 		this.orderNum = val;
 	}
@@ -591,3 +640,9 @@ public class PresidentPanel extends JPanel{
 
 
 }
+
+
+
+
+
+
